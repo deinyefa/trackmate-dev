@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import * as routes from '../constants/routes';
-import { signupValues, signUp } from '../actions';
+import { signupValues } from '../actions';
 import { auth } from '../firebase';
 
 const SignUpPage = ({ history }) => (
@@ -26,6 +26,7 @@ class NewSignUpForm extends Component {
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => history.push(routes.DASHBOARD))
       .catch(error => this.setState({ ...this.state, error: error.message }));
+    console.log(this.state);
     event.preventDefault();
   };
 
@@ -83,7 +84,7 @@ class NewSignUpForm extends Component {
           <button type="submit" disabled={isInvalid}>
             Sign Up
           </button>
-          {/* {error && <p>{error.message}</p>} */}
+          {<p>{this.state.error}</p>}
         </form>
       </div>
     );
@@ -108,7 +109,7 @@ const mapStateToProps = state => {
 };
 
 export default withRouter(SignUpPage);
-export const SignUpForm = connect(mapStateToProps, { signupValues, signUp })(
+export const SignUpForm = connect(mapStateToProps, { signupValues })(
   NewSignUpForm
 );
 export { SignUpLink };
