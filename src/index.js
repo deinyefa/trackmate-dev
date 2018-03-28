@@ -12,7 +12,7 @@ import reducers from './reducers';
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware}>
+  <Provider store={createStoreWithMiddleware(reducers)}>
     <App />
   </Provider>,
   document.getElementById('root')

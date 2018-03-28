@@ -1,11 +1,4 @@
-import { EMAIL_CHANGED, SIGNUP_VALUES } from './types';
-
-export const emailChanged = email => {
-  return {
-    type: EMAIL_CHANGED,
-    payload: email
-  };
-};
+import { SIGNUP_VALUES } from './types';
 
 export const signupValues = ({ prop, value }) => {
   return {

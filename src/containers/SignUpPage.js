@@ -12,7 +12,7 @@ const SignUpPage = () => (
   </div>
 );
 
-class SignUpForm extends Component {
+class NewSignUpForm extends Component {
   onSubmit = () => console.log('user has submitted form');
 
   render() {
@@ -23,6 +23,13 @@ class SignUpForm extends Component {
       passwordTwo,
       signupValues
     } = this.props;
+
+    const isInvalid =
+      passwordOne !== passwordTwo ||
+      passwordOne === '' ||
+      email === '' ||
+      companyName === '';
+
     return (
       <div className="formContainer">
         <form onSubmit={this.onSubmit}>
@@ -58,7 +65,10 @@ class SignUpForm extends Component {
             type="password"
             placeholder="Confirm Password"
           />
-          <button type="submit">Sign Up</button>
+          <button type="submit" disabled={isInvalid}>
+            Sign Up
+          </button>
+          {/* {error && <p>{error.message}</p>} */}
         </form>
       </div>
     );
@@ -81,5 +91,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { signupValues })(SignUpPage);
-export { SignUpForm, SignUpLink };
+export default SignUpPage;
+export const SignUpForm = connect(mapStateToProps, {signupValues})(NewSignUpForm)
+export { SignUpLink };
