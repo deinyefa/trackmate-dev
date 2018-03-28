@@ -1,19 +1,59 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 import '../App.css';
+
+import Navigation from './Navigation';
+import SignUpPage from './SignUpPage';
+import SignInPage from './SignInPage';
+import PasswordForgetPage from './PasswordForgetPage';
+import LandingPage from './LandingPage';
+import DashboardPage from './DashboardPage';
+import HelpPage from './HelpPage';
+import SettingsPage from './SettingsPage';
+import BillingPage from './BillingPage';
+import AddOrderPage from './AddOrderPage';
+
+import * as routes from '../constants/routes';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Router>
+        <div>
+          <Navigation />
+
+          <hr />
+          <Route
+            exact
+            path={routes.LANDING}
+            component={() => <LandingPage />}
+          />
+          <Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
+          <Route exact path={routes.SIGN_UP} component={() => <SignUpPage />} />
+          <Route
+            exact
+            path={routes.DASHBOARD}
+            component={() => <DashboardPage />}
+          />
+          <Route
+            exact
+            path={routes.BILLING}
+            component={() => <BillingPage />}
+          />
+          <Route
+            exact
+            path={routes.SETTINGS}
+            component={() => <SettingsPage />}
+          />
+          <Route exact path={routes.HELP} component={() => <HelpPage />} />
+          <Route
+            exact
+            path={routes.ADD_ORDER}
+            component={() => <AddOrderPage />}
+          />
+        </div>
+      </Router>
     );
   }
 }
