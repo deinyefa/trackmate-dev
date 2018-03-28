@@ -1,19 +1,33 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import * as routes from '../constants/routes';
-import { signupValues } from '../actions';
+import { signupValues, signUp } from '../actions';
+import { auth } from '../firebase';
 
-const SignUpPage = () => (
+const SignUpPage = ({ history }) => (
   <div>
     <h1>Sign Up Page</h1>
-    <SignUpForm />
+    <SignUpForm history={history} />
   </div>
 );
 
+const SIGNUP_STATE = { error: null };
+
 class NewSignUpForm extends Component {
-  onSubmit = () => console.log('user has submitted form');
+  constructor(props) {
+    super(props);
+    this.state = { ...SIGNUP_STATE };
+  }
+  onSubmit = event => {
+    const { email, passwordOne, companyName, history } = this.props;
+    auth
+      .doCreateUserWithEmailAndPassword(email, passwordOne)
+      .then(authUser => history.push(routes.DASHBOARD))
+      .catch(error => this.setState({ ...this.state, error: error.message }));
+    event.preventDefault();
+  };
 
   render() {
     const {
@@ -21,7 +35,8 @@ class NewSignUpForm extends Component {
       companyName,
       passwordOne,
       passwordTwo,
-      signupValues
+      signupValues,
+      error
     } = this.props;
 
     const isInvalid =
@@ -82,15 +97,18 @@ const SignUpLink = () => {
 };
 
 const mapStateToProps = state => {
-  const { email, companyName, passwordOne, passwordTwo } = state.auth;
+  const { email, companyName, passwordOne, passwordTwo, error } = state.auth;
   return {
     email,
     companyName,
     passwordOne,
-    passwordTwo
+    passwordTwo,
+    error
   };
 };
 
-export default SignUpPage;
-export const SignUpForm = connect(mapStateToProps, {signupValues})(NewSignUpForm)
+export default withRouter(SignUpPage);
+export const SignUpForm = connect(mapStateToProps, { signupValues, signUp })(
+  NewSignUpForm
+);
 export { SignUpLink };

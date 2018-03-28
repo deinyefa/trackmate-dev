@@ -1,4 +1,8 @@
-import { EMAIL_CHANGED, SIGNUP_VALUES } from '../actions/types';
+import {
+  SIGNUP_VALUES,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILED
+} from '../actions/types';
 
 const INITIAL_STATE = {
   companyName: '',
@@ -9,10 +13,13 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-  console.log(state);
   switch (action.type) {
     case SIGNUP_VALUES:
       return { ...state, [action.payload.prop]: action.payload.value };
+    case SIGNUP_SUCCESS:
+      return { ...state };
+    case SIGNUP_FAILED:
+      return { ...state, error: action.payload };
     default:
       return state;
   }
