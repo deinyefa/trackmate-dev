@@ -3,3 +3,28 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+.signupContainer {
+  width: 300px;
+  height: 400px;
+  position: absolute;
+  top: 7em;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  margin: auto;
+}
+.signupContainer h1 {
+  text-align: center;
+}
+.formContainer,
+.formContainer button {
+  margin-top: 2em;
+}
+.signInLink {
+  margin-top: 1em;
+  text-align: center;
+}
+.formContainer .row {
+  margin-bottom: 1em;
+}

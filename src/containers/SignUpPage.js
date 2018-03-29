@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import {
+  Container,
+  Row,
+  Col,
+  Input,
+  InputGroup,
+  Button,
+  Alert
+} from 'reactstrap';
 
 import * as routes from '../constants/routes';
 import { signupValues } from '../actions';
 import { auth } from '../firebase';
 
 const SignUpPage = ({ history }) => (
-  <div>
-    <h1>Sign Up Page</h1>
+  <Container className="signupContainer">
+    <h1>Sign Up</h1>
     <SignUpForm history={history} />
-  </div>
+  </Container>
 );
 
 const SIGNUP_STATE = { error: null };
@@ -36,8 +46,7 @@ class NewSignUpForm extends Component {
       companyName,
       passwordOne,
       passwordTwo,
-      signupValues,
-      error
+      signupValues
     } = this.props;
 
     const isInvalid =
@@ -49,62 +58,110 @@ class NewSignUpForm extends Component {
     return (
       <div className="formContainer">
         <form onSubmit={this.onSubmit}>
-          <input
-            value={companyName}
-            onChange={event =>
-              signupValues({ prop: 'companyName', value: event.target.value })
-            }
-            type="text"
-            placeholder="CompanyName"
-          />
-          <input
-            value={email}
-            onChange={event =>
-              signupValues({ prop: 'email', value: event.target.value })
-            }
-            type="text"
-            placeholder="Email"
-          />
-          <input
-            value={passwordOne}
-            onChange={event =>
-              signupValues({ prop: 'passwordOne', value: event.target.value })
-            }
-            type="password"
-            placeholder="password"
-          />
-          <input
-            value={passwordTwo}
-            onChange={event =>
-              signupValues({ prop: 'passwordTwo', value: event.target.value })
-            }
-            type="password"
-            placeholder="Confirm Password"
-          />
-          <button type="submit" disabled={isInvalid}>
+          {this.state.error ? (
+            <Alert color="danger">{this.state.error}</Alert>
+          ) : (
+            ''
+          )}
+          <Row>
+            <Col>
+              <InputGroup>
+                <Input
+                  value={companyName}
+                  onChange={event =>
+                    signupValues({
+                      prop: 'companyName',
+                      value: event.target.value
+                    })
+                  }
+                  type="text"
+                  placeholder="Company Name"
+                />
+              </InputGroup>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <InputGroup>
+                <Input
+                  value={email}
+                  onChange={event =>
+                    signupValues({ prop: 'email', value: event.target.value })
+                  }
+                  type="text"
+                  placeholder="Email"
+                />
+              </InputGroup>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <InputGroup>
+                <Input
+                  value={passwordOne}
+                  onChange={event =>
+                    signupValues({
+                      prop: 'passwordOne',
+                      value: event.target.value
+                    })
+                  }
+                  type="password"
+                  placeholder="password"
+                />
+              </InputGroup>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <InputGroup>
+                <Input
+                  value={passwordTwo}
+                  onChange={event =>
+                    signupValues({
+                      prop: 'passwordTwo',
+                      value: event.target.value
+                    })
+                  }
+                  type="password"
+                  placeholder="Confirm Password"
+                />
+              </InputGroup>
+            </Col>
+          </Row>
+          <Button
+            type="submit"
+            disabled={isInvalid}
+            outline
+            color="primary"
+            block
+          >
             Sign Up
-          </button>
-          {<p>{this.state.error}</p>}
+          </Button>
         </form>
+        <SignInLink />
       </div>
     );
   }
 }
 
-const SignUpLink = () => {
-  <p>
-    Don't have an account? <Link to={routes.SIGN_UP}>Sign Up</Link>
-  </p>;
+Container.propTypes = {
+  fluid: PropTypes.bool
+  // applies .container-fluid class
 };
 
+const SignInLink = () => (
+  <p className="signInLink">
+    Already have an account? <Link to={routes.SIGN_IN}>Sign In</Link>
+  </p>
+);
+
 const mapStateToProps = state => {
-  const { email, companyName, passwordOne, passwordTwo, error } = state.auth;
+  const { email, companyName, passwordOne, passwordTwo } = state.auth;
   return {
     email,
     companyName,
     passwordOne,
-    passwordTwo,
-    error
+    passwordTwo
   };
 };
 
@@ -112,4 +169,4 @@ export default withRouter(SignUpPage);
 export const SignUpForm = connect(mapStateToProps, { signupValues })(
   NewSignUpForm
 );
-export { SignUpLink };
+export { SignInLink };
