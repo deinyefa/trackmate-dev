@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Navbar, NavbarBrand, NavItem, Nav } from 'reactstrap';
 
 import SignOut from './SignOut';
 import * as routes from '../constants/routes';
@@ -9,28 +10,28 @@ const Navigation = ({ authUser }) => (
 );
 
 const AuthNavigation = () => (
-  <ul>
-    <li>
-      <Link to={routes.SIGN_IN}>Sign In</Link>
-    </li>
-    <li>
-      <Link to={routes.LANDING}>Landing</Link>
-    </li>
-    <li>
-      <SignOut />
-    </li>
-  </ul>
+  <Navbar color="faded" light>
+    <NavbarBrand href={routes.LANDING}>trackmate</NavbarBrand>
+    <Nav className="ml-auto" navbar>
+      <NavItem>
+        <Link to={routes.DASHBOARD}>Dashboard</Link>
+      </NavItem>
+      <NavItem>
+        <SignOut />
+      </NavItem>
+    </Nav>
+  </Navbar>
 );
 
 const NonAuthNavigation = () => (
-  <ul>
-    <li>
-      <Link to={routes.SIGN_IN}>Sign In</Link>
-    </li>
-    <li>
-      <Link to={routes.LANDING}>Landing</Link>
-    </li>
-  </ul>
+  <NavbarBrand color="faded" light>
+    <NavbarBrand href={routes.LANDING}>trackmate</NavbarBrand>
+    <Nav className="ml-auto" navbar>
+      <NavItem>
+        <Link to={routes.SIGN_IN}>Sign In</Link>
+      </NavItem>
+    </Nav>
+  </NavbarBrand>
 );
 
 export default Navigation;

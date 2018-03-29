@@ -5,6 +5,7 @@
   "dependencies": {
     "bootstrap": "^4.0.0",
     "firebase": "^4.12.0",
+    "node-sass-chokidar": "^1.2.2",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -16,6 +17,9 @@
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css":
+      "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

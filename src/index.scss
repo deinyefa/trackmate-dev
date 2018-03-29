@@ -1,35 +1,37 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif; }
-
+  font-family: sans-serif;
+}
 /* NAVIGATION */
 button.btn,
 button.btn:hover,
 button.btn:active {
   background: transparent !important;
   color: black !important;
-  border: none; }
-
+  border: none;
+}
 button.btn:hover {
-  text-decoration: underline; }
-
-.nav-item button {
-  padding: 0 1em; }
-
-.nav-item a {
-  color: black; }
-
+  text-decoration: underline;
+}
+.nav-item {
+  button {
+    padding: 0 1em;
+  }
+  a {
+    color: black;
+  }
+}
 nav {
   border-bottom: 1px solid;
   margin-bottom: 1em;
   box-shadow: 0px 1px 7px black;
   padding-top: 2em !important;
-  padding-bottom: 2em !important; }
-
+  padding-bottom: 2em !important;
+}
 .navbar-nav {
-  flex-direction: row !important; }
-
+  flex-direction: row !important;
+}
 /* AUTH SCREENS */
 .authContainer {
   width: 300px;
@@ -39,47 +41,48 @@ nav {
   bottom: 0;
   left: 0;
   right: 0;
-  margin: auto; }
-
+  margin: auto;
+}
 .signIn {
-  height: 280px; }
-
+  height: 280px;
+}
 .authContainer h1 {
-  text-align: center; }
-
+  text-align: center;
+}
 .formContainer,
 .formContainer button {
-  margin-top: 2em; }
-
+  margin-top: 2em;
+}
 .signInLink {
   margin-top: 1em;
-  text-align: center; }
-
+  text-align: center;
+}
 .signInLink button {
   padding: 0;
   margin: 0;
   background: transparent;
   border: none;
-  color: black; }
-
+  color: black;
+}
 .signInLink button:hover,
 .signInLink button:active {
   text-decoration: underline;
   background: transparent !important;
-  color: black !important; }
-
+  color: black !important;
+}
 .formContainer .row {
-  margin-bottom: 1em; }
-
+  margin-bottom: 1em;
+}
 .modal-header {
-  border: none; }
-
+  border: none;
+}
 .modal-body {
   text-align: center;
-  padding-top: 1em; }
-
+  padding-top: 1em;
+}
 .modal-body input {
-  margin-top: 1em; }
-
+  margin-top: 1em;
+}
 .modal-footer {
-  border: none; }
+  border: none;
+}

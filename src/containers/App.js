@@ -36,7 +36,6 @@ class App extends Component {
       <Router>
         <div>
           <Navigation authUser={this.state.authUser} />
-          <hr />
           <Route
             exact
             path={routes.LANDING}
