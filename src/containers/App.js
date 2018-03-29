@@ -7,7 +7,7 @@ import Navigation from '../components/Navigation';
 import SignUpPage from './SignUpPage';
 import SignInPage from './SignInPage';
 import LandingPage from '../components/LandingPage';
-import DashboardPage from '../components/DashboardPage';
+// import DashboardPage from '../components/DashboardPage';
 import HelpPage from '../components/HelpPage';
 import SettingsPage from '../components/SettingsPage';
 import BillingPage from '../components/BillingPage';
@@ -43,11 +43,11 @@ class App extends Component {
           />
           <Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
           <Route exact path={routes.SIGN_UP} component={() => <SignUpPage />} />
-          <Route
+          {/* <Route
             exact
             path={routes.DASHBOARD}
             component={() => <DashboardPage />}
-          />
+          /> */}
           <Route
             exact
             path={routes.BILLING}
