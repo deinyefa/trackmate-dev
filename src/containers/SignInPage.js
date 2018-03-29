@@ -7,7 +7,11 @@ import {
   Input,
   InputGroup,
   Button,
-  Alert
+  Alert,
+  Modal,
+  ModalHeader,
+  ModalFooter,
+  ModalBody
 } from 'reactstrap';
 
 import { auth } from '../firebase';
@@ -28,13 +32,25 @@ const byPropKey = (propertyName, value) => () => ({
 const SIGNIN_STATE = {
   email: '',
   password: '',
-  error: null
+  error: null,
+  modal: false
 };
 
 class SignInForm extends Component {
   constructor(props) {
     super(props);
     this.state = { ...SIGNIN_STATE };
+
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle() {
+    this.setState({
+      modal: !this.state.modal,
+      email: '',
+      pwdResetError: '',
+      pwdResetSuccess: ''
+    });
   }
 
   onSubmit = event => {
@@ -48,13 +64,35 @@ class SignInForm extends Component {
         history.push(routes.DASHBOARD);
       })
       .catch(error => {
-        this.setState(byPropKey('error', error));
+        this.setState(byPropKey('error', error.message));
+      });
+    event.preventDefault();
+  };
+
+  onSubmitForgotPassword = event => {
+    const { email } = this.state;
+
+    auth
+      .doPasswordReset(email)
+      .then(() => {
+        this.setState(() => ({
+          pwdResetSuccess: 'An email has successfully been sent to you'
+        }));
+      })
+      .catch(error => {
+        this.setState(byPropKey('pwdResetError', error.message));
       });
     event.preventDefault();
   };
 
   render() {
-    const { email, password, error } = this.state;
+    const {
+      email,
+      password,
+      error,
+      pwdResetError,
+      pwdResetSuccess
+    } = this.state;
     const isInvalid = password === '' || email === '';
     return (
       <div className="formContainer">
@@ -68,7 +106,7 @@ class SignInForm extends Component {
                   onChange={event =>
                     this.setState(byPropKey('email', event.target.value))
                   }
-                  type="text"
+                  type="email"
                   placeholder="Email Address"
                 />
               </InputGroup>
@@ -99,6 +137,50 @@ class SignInForm extends Component {
           </Button>
         </form>
         <SignUpLink />
+        <div>
+          <p className="signInLink">
+            Forgot Password?{' '}
+            <Button color="danger" onClick={this.toggle}>
+              Click Here
+            </Button>
+          </p>
+          <Modal
+            isOpen={this.state.modal}
+            toggle={this.toggle}
+            className={this.props.className}
+          >
+            <ModalHeader toggle={this.toggle}>Forgot Password</ModalHeader>
+            <ModalBody>
+              {pwdResetError ? (
+                <Alert color="danger">{pwdResetError}</Alert>
+              ) : (
+                ''
+              )}
+              {pwdResetSuccess ? (
+                <Alert color="success">{pwdResetSuccess}</Alert>
+              ) : (
+                ''
+              )}
+              Enter your an email address we can reach you at to reset your
+              password.
+              <Input
+                type="email"
+                value={email}
+                onChange={event =>
+                  this.setState(byPropKey('email', event.target.value))
+                }
+              />
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={this.onSubmitForgotPassword}>
+                Reset Password
+              </Button>{' '}
+              <Button color="secondary" onClick={this.toggle}>
+                Cancel
+              </Button>
+            </ModalFooter>
+          </Modal>
+        </div>
       </div>
     );
   }

@@ -6,7 +6,6 @@ import '../App.css';
 import Navigation from '../components/Navigation';
 import SignUpPage from './SignUpPage';
 import SignInPage from './SignInPage';
-import PasswordForgetPage from '../components/PasswordForgetPage';
 import LandingPage from '../components/LandingPage';
 import DashboardPage from '../components/DashboardPage';
 import HelpPage from '../components/HelpPage';
