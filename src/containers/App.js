@@ -3,25 +3,40 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import '../App.css';
 
-import Navigation from './Navigation';
-import SignUpPage from '../containers/SignUpPage';
-import SignInPage from '../containers/SignInPage';
-import PasswordForgetPage from './PasswordForgetPage';
-import LandingPage from './LandingPage';
-import DashboardPage from './DashboardPage';
-import HelpPage from './HelpPage';
-import SettingsPage from './SettingsPage';
-import BillingPage from './BillingPage';
-import AddOrderPage from './AddOrderPage';
+import Navigation from '../components/Navigation';
+import SignUpPage from './SignUpPage';
+import SignInPage from './SignInPage';
+import PasswordForgetPage from '../components/PasswordForgetPage';
+import LandingPage from '../components/LandingPage';
+import DashboardPage from '../components/DashboardPage';
+import HelpPage from '../components/HelpPage';
+import SettingsPage from '../components/SettingsPage';
+import BillingPage from '../components/BillingPage';
+import AddOrderPage from '../components/AddOrderPage';
 
 import * as routes from '../constants/routes';
+import { firebase } from '../firebase';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { authUser: null };
+  }
+
+  componentDidMount() {
+    firebase.auth.onAuthStateChanged(authUser => {
+      authUser
+        ? this.setState(() => ({ authUser }))
+        : this.setState(() => ({ authUser: null }));
+    });
+  }
+
   render() {
     return (
       <Router>
         <div>
-          <Navigation />
+          <Navigation authUser={this.state.authUser} />
           <hr />
           <Route
             exact
