@@ -17,7 +17,7 @@ import { signupValues } from '../actions';
 import { auth } from '../firebase';
 
 const SignUpPage = ({ history }) => (
-  <Container className="signupContainer">
+  <Container className="authContainer">
     <h1>Sign Up</h1>
     <SignUpForm history={history} />
   </Container>
@@ -135,7 +135,7 @@ class NewSignUpForm extends Component {
             color="primary"
             block
           >
-            Sign Up
+            GO!
           </Button>
         </form>
         <SignInLink />

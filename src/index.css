@@ -3,18 +3,20 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
-.signupContainer {
+.authContainer {
   width: 300px;
   height: 400px;
   position: absolute;
-  top: 7em;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-
   margin: auto;
 }
-.signupContainer h1 {
+.signIn {
+  height: 280px;
+}
+.authContainer h1 {
   text-align: center;
 }
 .formContainer,

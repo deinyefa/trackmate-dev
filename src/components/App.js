@@ -5,7 +5,7 @@ import '../App.css';
 
 import Navigation from './Navigation';
 import SignUpPage from '../containers/SignUpPage';
-import SignInPage from './SignInPage';
+import SignInPage from '../containers/SignInPage';
 import PasswordForgetPage from './PasswordForgetPage';
 import LandingPage from './LandingPage';
 import DashboardPage from './DashboardPage';
