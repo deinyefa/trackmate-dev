@@ -3,6 +3,8 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+/* NAVIGATION */
+/* AUTH SCREENS */
 .authContainer {
   width: 300px;
   height: 400px;
@@ -27,6 +29,32 @@ body {
   margin-top: 1em;
   text-align: center;
 }
+.signInLink button {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  color: black;
+}
+.signInLink button:hover,
+.signInLink button:active {
+  text-decoration: underline;
+  background: transparent !important;
+  color: black !important;
+}
 .formContainer .row {
   margin-bottom: 1em;
+}
+.modal-header {
+  border: none;
+}
+.modal-body {
+  text-align: center;
+  padding-top: 1em;
+}
+.modal-body input {
+  margin-top: 1em;
+}
+.modal-footer {
+  border: none;
 }

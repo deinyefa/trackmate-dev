@@ -140,7 +140,7 @@ class SignInForm extends Component {
         <div>
           <p className="signInLink">
             Forgot Password?{' '}
-            <Button color="danger" onClick={this.toggle}>
+            <Button color="primary" onClick={this.toggle}>
               Click Here
             </Button>
           </p>
