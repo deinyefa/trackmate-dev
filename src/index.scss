@@ -4,6 +4,88 @@ body {
   font-family: sans-serif;
 }
 /* NAVIGATION */
+.container {
+  width: 800px;
+  overflow: hidden;
+  display: inline-block;
+}
+.side-bar {
+  background: lightblue;
+  position: absolute;
+  height: 100%;
+  width: 200px;
+  color: white;
+  transition: margin-left 0.5s;
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  li.menu-head {
+    padding: 20px;
+    font-size: 24px;
+    a {
+      color: white;
+      text-decoration: none;
+      height: 50px;
+    }
+    button.push-menu {
+      border: transparent;
+      background: transparent;
+      padding: 0;
+      font-size: 24px;
+    }
+  }
+  .menu-push-down {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+  }
+  .menu li a {
+    color: white;
+    text-decoration: none;
+    display: inline-table;
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 18px;
+    i {
+      margin-top: 4px;
+    }
+    &:hover {
+      border-left: 3px solid grey;
+      padding-left: 17px;
+    }
+    &.clicked {
+      padding-left: 17px;
+      background: orange;
+      border-left: 3px solid lightgrey;
+      &::before {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-top: 20px solid transparent;
+        border-bottom: 20px solid transparent;
+        border-left: 7px solid orange;
+        margin-top: -10px;
+        margin-left: 180px;
+      }
+    }
+  }
+}
+.wrapper {
+  &.clicked > .side-bar {
+    margin-left: -150px;
+    transition: margin-left 0.5s;
+  }
+  &.clicked > .content {
+    padding-left: 50px;
+    transition: padding-left 0.5s;
+  }
+  .content {
+    padding-left: 200px;
+    transition: padding-left 0.5s;
+  }
+}
 // button.btn,
 // button.btn:hover,
 // button.btn:active {

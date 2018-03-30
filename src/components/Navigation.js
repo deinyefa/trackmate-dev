@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { Navbar, NavbarBrand, NavItem, Nav } from 'reactstrap';
+import {
+  Navbar,
+  NavbarBrand,
+  NavItem,
+  Nav,
+  Col,
+  Container,
+  Row,
+  Button
+} from 'reactstrap';
+import 'font-awesome/css/font-awesome.min.css';
 
 import SignOut from './SignOut';
 import * as routes from '../constants/routes';
@@ -21,6 +31,12 @@ const authRoutes = [
     main: () => <h2>Add Order</h2>
   },
   {
+    path: '/help',
+    exact: true,
+    sidebar: () => <div>help</div>,
+    main: () => <h2>Help</h2>
+  },
+  {
     path: '/settings',
     exact: true,
     sidebar: () => <div>settings!</div>,
@@ -38,45 +54,92 @@ const Navigation = ({ authUser }) => (
   <div>{authUser ? <SideBarNav /> : <NonAuthNavigation />}</div>
 );
 
-const SideBarNav = () => (
-  <Router>
-    <div style={{ display: 'flex' }}>
-      <div
-        style={{
-          padding: '10px',
-          width: '40%',
-          background: '#f0f0f0'
-        }}
-      >
-        <ul style={{ listStyleType: 'none', padding: 0 }}>
-          <li>
-            <Link to="/dashboard">trackmate</Link>
-          </li>
-          <li>
-            <Link to="/add">Add Order</Link>
-          </li>
-          <li>
-            <Link to="/settings">Settings</Link>
-          </li>
-          <li>
-            <Link to="/billing">Billing</Link>
-          </li>
-        </ul>
-      </div>
-      <div style={{ flex: 1, padding: '10px' }}>
-        <SignOut />
-        {authRoutes.map((route, index) => (
-          <Route
-            key={index}
-            path={route.path}
-            exact={route.exact}
-            component={route.main}
-          />
-        ))}
-      </div>
-    </div>
-  </Router>
-);
+class SideBarNav extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { isClicked: false };
+
+    this.toggleSideBarMenu = this.toggleSideBarMenu.bind(this);
+  }
+
+  toggleSideBarMenu() {
+    this.setState({ isClicked: !this.state.isClicked });
+  }
+
+  render() {
+    let pushMenu = this.state.isClicked ? 'clicked wrapper' : 'wrapper';
+    return (
+      <Router>
+        <Container>
+          <Row>
+            <div className={pushMenu}>
+              <div className="side-bar">
+                <ul>
+                  <li className="menu-head">
+                    trackmate<Button
+                      className="push-menu pull-right"
+                      onClick={this.toggleSideBarMenu}
+                    >
+                      <i className="fa fa-bars" />
+                    </Button>
+                  </li>
+                  <div className="menu">
+                    <li>
+                      <Link to="/dashboard">
+                        Dashboard<i className="fa fa-compass pull-right" />
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/add">
+                        Add Order<i className="fa fa-plus pull-right" />
+                      </Link>
+                    </li>
+                    <div className="menu-push-down">
+                      <li>
+                        <Link to="/help">
+                          Help<i className="fa fa-info-circle pull-right" />
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/settings">
+                          Settings<i className="fa fa-cogs pull-right" />
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/billing">
+                          Billing<i className="fa fa-credit-card pull-right" />
+                        </Link>
+                      </li>
+                    </div>
+                  </div>
+                </ul>
+              </div>
+              <div className="content">
+                <Col>
+                  <div className="panel panel-default">
+                    <div className="panel-heading">
+                      <SignOut />
+                    </div>
+                    <div className="panel-body">
+                      {authRoutes.map((route, index) => (
+                        <Route
+                          key={index}
+                          path={route.path}
+                          exact={route.exact}
+                          component={route.main}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </Col>
+              </div>
+            </div>
+          </Row>
+        </Container>
+      </Router>
+    );
+  }
+}
 
 // const AuthNavigation = () => (
 //   <Navbar color="faded" light>
