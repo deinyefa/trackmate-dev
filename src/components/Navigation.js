@@ -50,7 +50,7 @@ const SideBarNav = () => (
       >
         <ul style={{ listStyleType: 'none', padding: 0 }}>
           <li>
-            <Link to="/">trackmate</Link>
+            <Link to="/dashboard">trackmate</Link>
           </li>
           <li>
             <Link to="/add">Add Order</Link>
@@ -64,6 +64,7 @@ const SideBarNav = () => (
         </ul>
       </div>
       <div style={{ flex: 1, padding: '10px' }}>
+        <SignOut />
         {authRoutes.map((route, index) => (
           <Route
             key={index}
@@ -77,19 +78,19 @@ const SideBarNav = () => (
   </Router>
 );
 
-const AuthNavigation = () => (
-  <Navbar color="faded" light>
-    <NavbarBrand href={routes.LANDING}>trackmate</NavbarBrand>
-    <Nav className="ml-auto" navbar>
-      <NavItem>
-        <Link to={routes.DASHBOARD}>Dashboard</Link>
-      </NavItem>
-      <NavItem>
-        <SignOut />
-      </NavItem>
-    </Nav>
-  </Navbar>
-);
+// const AuthNavigation = () => (
+//   <Navbar color="faded" light>
+//     <NavbarBrand href={routes.LANDING}>trackmate</NavbarBrand>
+//     <Nav className="ml-auto" navbar>
+//       <NavItem>
+//         <Link to={routes.DASHBOARD}>Dashboard</Link>
+//       </NavItem>
+//       <NavItem>
+//         <SignOut />
+//       </NavItem>
+//     </Nav>
+//   </Navbar>
+// );
 
 const NonAuthNavigation = () => (
   <Navbar color="faded" light>
