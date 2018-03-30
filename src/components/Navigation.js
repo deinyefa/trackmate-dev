@@ -10,12 +10,13 @@ import {
   Row,
   Button
 } from 'reactstrap';
+import PropTypes from 'prop-types';
 import 'font-awesome/css/font-awesome.min.css';
 
 import SignOut from './SignOut';
 import * as routes from '../constants/routes';
 
-import DashboardPage from '../components/DashboardPage';
+import DashboardPage from '../containers/DashboardPage';
 
 const authRoutes = [
   {
@@ -70,7 +71,7 @@ class SideBarNav extends Component {
     let pushMenu = this.state.isClicked ? 'clicked wrapper' : 'wrapper';
     return (
       <Router>
-        <Container>
+        <Container fluid>
           <Row>
             <div className={pushMenu}>
               <div className="side-bar">
@@ -140,6 +141,11 @@ class SideBarNav extends Component {
     );
   }
 }
+
+Container.propTypes = {
+  fluid: PropTypes.bool
+  // applies .container-fluid class
+};
 
 // const AuthNavigation = () => (
 //   <Navbar color="faded" light>
