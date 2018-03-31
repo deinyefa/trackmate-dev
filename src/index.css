@@ -11,7 +11,7 @@ body {
 
 .side-bar {
   background: lightblue;
-  position: absolute;
+  position: fixed;
   height: 100%;
   width: 200px;
   color: white;
@@ -62,17 +62,48 @@ body {
         margin-top: -10px;
         margin-left: 180px; }
 
-.wrapper.clicked > .side-bar {
-  margin-left: -150px;
-  transition: margin-left 0.5s; }
-
-.wrapper.clicked > .content {
-  padding-left: 50px;
-  transition: padding-left 0.5s; }
-
-.wrapper .content {
-  padding-left: 200px;
-  transition: padding-left 0.5s; }
+.wrapper {
+  width: 100%; }
+  .wrapper.clicked > .side-bar {
+    margin-left: -143px;
+    transition: margin-left 0.5s; }
+  .wrapper.clicked > .content {
+    padding-left: 50px;
+    transition: padding-left 0.5s; }
+  .wrapper .content {
+    padding-left: 200px;
+    transition: padding-left 0.5s;
+    text-align: center; }
+    .wrapper .content .panel-heading {
+      text-align: right;
+      margin: 20px;
+      font-size: 25px;
+      border-bottom: 3px solid;
+      padding-bottom: 10px; }
+      .wrapper .content .panel-heading button {
+        background: transparent;
+        border: none;
+        color: black; }
+      .wrapper .content .panel-heading button,
+      .wrapper .content .panel-heading i {
+        font-size: 20px; }
+    .wrapper .content .panel-body h1 {
+      width: 100%;
+      margin-top: 2em; }
+    .wrapper .content .panel-body .orders-list {
+      list-style: none;
+      width: 100%; }
+      .wrapper .content .panel-body .orders-list li {
+        display: inline-block;
+        padding: 5px 20px; }
+    .wrapper .content .panel-body table.table {
+      margin-top: 3em;
+      vertical-align: middle; }
+      .wrapper .content .panel-body table.table th, .wrapper .content .panel-body table.table td {
+        vertical-align: middle; }
+      .wrapper .content .panel-body table.table button.btn {
+        margin-bottom: 5px;
+        padding: 2px 21px; }
 
 .nav-item button {
   padding: 0 1em; }

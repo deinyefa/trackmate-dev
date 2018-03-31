@@ -11,7 +11,7 @@ body {
 }
 .side-bar {
   background: lightblue;
-  position: absolute;
+  position: fixed;
   height: 100%;
   width: 200px;
   color: white;
@@ -73,8 +73,9 @@ body {
   }
 }
 .wrapper {
+  width: 100%;
   &.clicked > .side-bar {
-    margin-left: -150px;
+    margin-left: -143px;
     transition: margin-left 0.5s;
   }
   &.clicked > .content {
@@ -84,6 +85,48 @@ body {
   .content {
     padding-left: 200px;
     transition: padding-left 0.5s;
+    text-align: center;
+    .panel-heading {
+      text-align: right;
+      margin: 20px;
+      font-size: 25px;
+      border-bottom: 3px solid;
+      padding-bottom: 10px;
+      button {
+        background: transparent;
+        border: none;
+        color: black;
+      }
+      button,
+      i {
+        font-size: 20px;
+      }
+    }
+    .panel-body {
+      h1 {
+        width: 100%;
+        margin-top: 2em;
+      }
+      .orders-list {
+        list-style: none;
+        width: 100%;
+        li {
+          display: inline-block;
+          padding: 5px 20px;
+        }
+      }
+      table.table {
+        margin-top: 3em;
+        vertical-align: middle;
+        th, td {
+          vertical-align: middle;
+        }
+        button.btn {
+          margin-bottom: 5px;
+          padding: 2px 21px;
+        }
+      }
+    }
   }
 }
 // button.btn,

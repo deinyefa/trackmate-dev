@@ -6,10 +6,10 @@ class DashboardPage extends Component {
     return (
       <Container>
         <Row>
-          <h1>Welcome,[Company Name]</h1>
+          <h1>Welcome, [Company Name]</h1>
         </Row>
         <Row>
-          <ul>
+          <ul className="orders-list">
             <li>Open Orders: 2</li>
             <li>Closed Orders: 7</li>
           </ul>
