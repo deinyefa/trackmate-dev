@@ -99,7 +99,8 @@ body {
     .wrapper .content .panel-body table.table {
       margin-top: 3em;
       vertical-align: middle; }
-      .wrapper .content .panel-body table.table th, .wrapper .content .panel-body table.table td {
+      .wrapper .content .panel-body table.table th,
+      .wrapper .content .panel-body table.table td {
         vertical-align: middle; }
       .wrapper .content .panel-body table.table button.btn {
         margin-bottom: 5px;
@@ -174,3 +175,8 @@ nav {
 
 .modal-footer {
   border: none; }
+
+/* ADD ORDER */
+label.field-label, .form-text {
+  display: block;
+  text-align: left; }

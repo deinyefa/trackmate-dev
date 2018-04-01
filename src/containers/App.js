@@ -6,11 +6,11 @@ import '../App.css';
 import Navigation from '../components/Navigation';
 import SignUpPage from './SignUpPage';
 import SignInPage from './SignInPage';
-import LandingPage from '../components/LandingPage';
-import HelpPage from '../components/HelpPage';
-import SettingsPage from '../components/SettingsPage';
-import BillingPage from '../components/BillingPage';
-import AddOrderPage from '../components/AddOrderPage';
+// import LandingPage from '../components/LandingPage';
+// import HelpPage from '../components/HelpPage';
+// import SettingsPage from '../components/SettingsPage';
+// import BillingPage from '../components/BillingPage';
+// import AddOrderPage from '../components/AddOrderPage';
 
 import * as routes from '../constants/routes';
 import { firebase } from '../firebase';

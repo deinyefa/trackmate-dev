@@ -17,6 +17,7 @@ import SignOut from './SignOut';
 import * as routes from '../constants/routes';
 
 import DashboardPage from '../containers/DashboardPage';
+import AddOrderPage from '../containers/AddOrderPage';
 
 const authRoutes = [
   {
@@ -29,7 +30,7 @@ const authRoutes = [
     path: '/add',
     exact: true,
     sidebar: () => <div>add order</div>,
-    main: () => <h2>Add Order</h2>
+    main: () => <AddOrderPage />
   },
   {
     path: '/help',

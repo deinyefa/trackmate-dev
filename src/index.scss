@@ -118,7 +118,8 @@ body {
       table.table {
         margin-top: 3em;
         vertical-align: middle;
-        th, td {
+        th,
+        td {
           vertical-align: middle;
         }
         button.btn {
@@ -210,4 +211,9 @@ nav {
 }
 .modal-footer {
   border: none;
+}
+/* ADD ORDER */
+label.field-label, .form-text {
+  display: block;
+  text-align: left;
 }
