@@ -35,8 +35,7 @@ const AddOrderPage = props => (
             A unique 8 digit alphanumeric value given to each customer
           </FormText>
         </FormGroup>
-        <Row className="mt-5">
-          <legend>Customer Name</legend>
+        <Row>
           <Col>
             <FormGroup>
               <Label for="firstName" className="field-label">
@@ -89,6 +88,12 @@ const AddOrderPage = props => (
           Create
         </Button>
       </Form>
+    </Row>
+    <Row>
+      <Col>
+        <p>Trackmate Notification URL</p>
+        <p>[Generated with redux state]</p>
+      </Col>
     </Row>
   </Container>
 );

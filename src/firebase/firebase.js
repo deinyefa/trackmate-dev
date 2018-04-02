@@ -7,6 +7,8 @@ import {
   STORAGE_BUCKET,
   MESSAGING_SENDER_ID
 } from './variables';
+import { reactReduxFirebase } from 'react-redux-firebase';
+import { reduxFirestore } from 'redux-firestore';
 
 var config = {
   apiKey: API_KEY,
@@ -17,9 +19,22 @@ var config = {
   messagingSenderId: MESSAGING_SENDER_ID
 };
 
+// react-redux-firebase config
+const rrfConfig = {
+  userProfile: 'users',
+  useFirestoreForProfile: true
+};
+
 if (!firebase.apps.length) {
   firebase.initializeApp(config);
 }
+// initialize firebase database
+firebase.firestore();
 
 const auth = firebase.auth();
-export { auth };
+const reactReduxWithFirestore = () => {
+  reactReduxFirebase(firebase, rrfConfig)
+}
+const reduxWithFirestore = reduxFirestore(firebase);
+
+export { auth, reactReduxWithFirestore, reduxWithFirestore };
