@@ -34,13 +34,23 @@ class NewSignUpForm extends Component {
     const { email, passwordOne, companyName, history } = this.props;
     auth
       .doCreateUserWithEmailAndPassword(email, passwordOne)
-      .then(authUser => history.push(routes.DASHBOARD))
+      .then(authUser => {
+        db
+          .doCreateUser(authUser.uid, companyName, email)
+          .then(() => {
+            this.setState(() => ({ ...SIGNUP_STATE }));
+            history.push(routes.DASHBOARD);
+          })
+          .catch(error => {
+            this.setState({ ...this.state, error: error.message });
+          });
+      })
       .catch(error => this.setState({ ...this.state, error: error.message }));
     console.log(this.state);
-    // add company name to new company here
-    // firebase.db
     event.preventDefault();
   };
+
+  // TODO: CHECK THAT WHEN USER SIGNS UP, DATABASE STORES COMPANY NAME
 
   render() {
     const {

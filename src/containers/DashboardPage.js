@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Row, Table, Button, Input } from 'reactstrap';
 
+import withAuthorization from './withAuthorization';
+
 class DashboardPage extends Component {
   render() {
     return (
@@ -76,5 +78,9 @@ class DashboardPage extends Component {
     );
   }
 }
+
+// const authCondition = (authUser) => !!authUser;
+// export default withAuthorization(authCondition)(DashboardPage);
+
 
 export default DashboardPage;

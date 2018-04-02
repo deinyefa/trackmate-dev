@@ -18,6 +18,9 @@ import * as routes from '../constants/routes';
 
 import DashboardPage from '../containers/DashboardPage';
 import AddOrderPage from '../containers/AddOrderPage';
+import SettingsPage from './SettingsPage';
+import BillingPage from './BillingPage';
+import HelpPage from './HelpPage';
 
 const authRoutes = [
   {
@@ -36,19 +39,19 @@ const authRoutes = [
     path: '/help',
     exact: true,
     sidebar: () => <div>help</div>,
-    main: () => <h2>Help</h2>
+    main: () => <HelpPage />
   },
   {
     path: '/settings',
     exact: true,
     sidebar: () => <div>settings!</div>,
-    main: () => <h2>Settings</h2>
+    main: () => <SettingsPage />
   },
   {
     path: '/billing',
     exact: true,
     sidebar: () => <div>billing!</div>,
-    main: () => <h2>Billing</h2>
+    main: () => <BillingPage />
   }
 ];
 
