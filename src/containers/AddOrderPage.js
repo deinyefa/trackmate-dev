@@ -10,6 +10,8 @@ import {
   FormText,
   Button
 } from 'reactstrap';
+import { firebase } from '../firebase';
+import moment from 'moment';
 
 // Look at reduxForm sync validation for unique order number
 
@@ -27,6 +29,7 @@ const AddOrderPage = props => (
           <Field
             id="orderID"
             type="text"
+            name="orderID"
             component="input"
             placeholder="ex. A70T4Y88"
             className="form-control"
@@ -43,6 +46,7 @@ const AddOrderPage = props => (
               </Label>
               <Field
                 id="firstName"
+                name="firstName"
                 type="text"
                 component="input"
                 placeholder="Ada"
@@ -57,6 +61,7 @@ const AddOrderPage = props => (
               </Label>
               <Field
                 id="lastName"
+                name="lastName"
                 type="text"
                 component="input"
                 placeholder="Smith"
@@ -71,7 +76,7 @@ const AddOrderPage = props => (
           </Label>
           <Field
             id="orderStatus"
-            name="favoriteColor"
+            name="orderStatus"
             component="select"
             className="form-control"
           >
@@ -94,6 +99,22 @@ const AddOrderPage = props => (
         <p>Trackmate Notification URL</p>
         <p>[Generated with redux state]</p>
       </Col>
+    </Row>
+
+    <Row>
+      <Button
+        onClick={() =>
+          firebase.db
+            .collection('customers')
+            .add({ companyName: 'Sample Company' })
+            .then(() =>
+              console.log(`updated on ${moment().format('MMM D, YYYY')}`)
+            )
+            .catch(error => console.log('Error add document: ', error))
+        }
+      >
+        Add Sample Company
+      </Button>
     </Row>
   </Container>
 );

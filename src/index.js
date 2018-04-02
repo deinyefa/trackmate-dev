@@ -18,6 +18,7 @@ const createStoreWithMiddleware = compose(
   firebase.reduxWithFirestore()
 )(createStore);
 
+
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <App />

@@ -14,7 +14,7 @@ import {
 
 import * as routes from '../constants/routes';
 import { signupValues } from '../actions';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 
 const SignUpPage = ({ history }) => (
   <Container className="authContainer">
@@ -37,6 +37,8 @@ class NewSignUpForm extends Component {
       .then(authUser => history.push(routes.DASHBOARD))
       .catch(error => this.setState({ ...this.state, error: error.message }));
     console.log(this.state);
+    // add company name to new company here
+    // firebase.db
     event.preventDefault();
   };
 

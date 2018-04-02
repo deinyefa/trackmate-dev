@@ -29,12 +29,10 @@ if (!firebase.apps.length) {
   firebase.initializeApp(config);
 }
 // initialize firebase database
-firebase.firestore();
+const db = firebase.firestore();
 
 const auth = firebase.auth();
-const reactReduxWithFirestore = () => {
-  reactReduxFirebase(firebase, rrfConfig)
-}
-const reduxWithFirestore = reduxFirestore(firebase);
+const reactReduxWithFirestore = () => reactReduxFirebase(firebase, rrfConfig);
+const reduxWithFirestore = () => reduxFirestore(firebase);
 
-export { auth, reactReduxWithFirestore, reduxWithFirestore };
+export { db, auth, reactReduxWithFirestore, reduxWithFirestore };
