@@ -177,7 +177,7 @@ nav {
   border: none; }
 
 /* ADD ORDER */
-label.field-label, .form-text {
+label.field-label, .form-text, .invalid-feedback {
   display: block;
   text-align: left; }
 

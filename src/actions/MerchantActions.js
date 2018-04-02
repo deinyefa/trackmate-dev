@@ -1,4 +1,5 @@
 import { firebase } from '../firebase';
+import moment from 'moment';
 import {
   GET_CURRENT_USER,
   ADD_ORDER_VALUES,
@@ -33,7 +34,8 @@ export const addAnOrder = (orderID, lastName, firstName, orderStatus) => {
       orderID,
       lastName,
       firstName,
-      orderStatus
+      orderStatus,
+      updatedOn: moment().format('MMM D, YYYY')
     };
     let customersRef = firebase.db
       .collection('companies')
@@ -47,8 +49,7 @@ export const addAnOrder = (orderID, lastName, firstName, orderStatus) => {
         if (doc.exists) {
           dispatch({
             type: EXISTING_ID,
-            payload:
-              'Oh no! Looks like something went wrong.'
+            payload: 'Oh no! Looks like something went wrong.'
           });
         } else {
           customersRef.set(customerData);
