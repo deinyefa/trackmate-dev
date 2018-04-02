@@ -4,20 +4,35 @@ import {
   GET_CURRENT_USER,
   ADD_ORDER_VALUES,
   EXISTING_ID,
-  ADD_ORDER_SUCCESS
+  ADD_ORDER_SUCCESS,
+  ORDERS_LIST
 } from './types';
 
 export const getCurrentUser = () => {
   return dispatch => {
     let merchantInfo;
+    let currentMerchant = firebase.auth.currentUser.uid;
     firebase.db
       .collection('companies')
-      .doc(firebase.auth.currentUser.uid)
+      .doc(currentMerchant)
       .get()
       .then(doc => {
         merchantInfo = doc.data();
         dispatch({ type: GET_CURRENT_USER, payload: merchantInfo });
       });
+
+    let customersRef = firebase.db
+      .collection('companies')
+      .doc(currentMerchant)
+      .collection('customers');
+    customersRef.get().then(querySnapshot => {
+      let merchantCustomers = [];
+      querySnapshot.forEach(doc => {
+        merchantCustomers.push({ id: doc.id, data: doc.data() });
+      });
+      dispatch({ type: ORDERS_LIST, payload: merchantCustomers });
+      console.log(merchantCustomers);
+    });
   };
 };
 
@@ -55,7 +70,8 @@ export const addAnOrder = (orderID, lastName, firstName, orderStatus) => {
           customersRef.set(customerData);
           dispatch({
             type: ADD_ORDER_SUCCESS,
-            payload: 'Order has successfully been added'
+            payload:
+              "Order has successfully been added, find your customer's trackmate notification url below"
           });
         }
       })

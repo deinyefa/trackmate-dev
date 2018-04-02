@@ -2,7 +2,8 @@ import {
   GET_CURRENT_USER,
   ADD_ORDER_VALUES,
   EXISTING_ID,
-  ADD_ORDER_SUCCESS
+  ADD_ORDER_SUCCESS,
+  ORDERS_LIST
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -10,7 +11,8 @@ const INITIAL_STATE = {
   orderID: '',
   firstName: '',
   lastName: '',
-  orderStatus: ''
+  orderStatus: '',
+  merchantCustomers: []
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -36,12 +38,17 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         orderAdded: action.payload,
+        trackmateURL: `https://trackmate.com/${state.lastName.toLowerCase()}/${
+          state.orderID
+        }`,
         orderID: '',
         lastName: '',
         firstName: '',
         orderStatus: ''
       };
+    case ORDERS_LIST:
+      return { ...state, merchantCustomers: action.payload };
     default:
-      return state;
+      return { ...state, orderAdded: null, orderError: null };
   }
 };

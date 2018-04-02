@@ -41,7 +41,8 @@ class AddOrderPage extends Component {
       orderID,
       orderStatus,
       orderAdded,
-      orderError
+      orderError,
+      trackmateURL
     } = this.props;
 
     const isInvalid =
@@ -168,33 +169,14 @@ class AddOrderPage extends Component {
           </Form>
         </Row>
         <Row>
-          <Col>
-            <p>Trackmate Notification URL</p>
-
-            {lastName === undefined ? (
-              <p>http://trackmate.com/</p>
-            ) : (
-              <p>
-                http://trackmate.com/{lastName}/{orderID}
-              </p>
-            )}
-          </Col>
-        </Row>
-
-        <Row>
-          <Button
-            onClick={() =>
-              firebase.db
-                .collection('customers')
-                .add({ companyName: 'Sample Company' })
-                .then(() =>
-                  console.log(`updated on ${moment().format('MMM D, YYYY')}`)
-                )
-                .catch(error => console.log('Error add document: ', error))
-            }
-          >
-            Add Sample Company
-          </Button>
+          {orderAdded ? (
+            <Col>
+              <p>Trackmate Notification URL</p>
+              <a href="https://google.com" target="_blank">{trackmateURL}</a>
+            </Col>
+          ) : (
+            ''
+          )}
         </Row>
       </Container>
     );
@@ -208,7 +190,8 @@ const mapStateToProps = state => {
     firstName,
     orderStatus,
     orderError,
-    orderAdded
+    orderAdded,
+    trackmateURL
   } = state.merchant;
   return {
     orderID,
@@ -216,7 +199,8 @@ const mapStateToProps = state => {
     firstName,
     orderStatus,
     orderError,
-    orderAdded
+    orderAdded,
+    trackmateURL
   };
 };
 

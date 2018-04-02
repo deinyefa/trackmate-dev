@@ -12,6 +12,7 @@ class DashboardPage extends Component {
   }
 
   render() {
+    const { merchantCustomers } = this.props;
     return (
       <Container>
         <Row>
@@ -27,7 +28,7 @@ class DashboardPage extends Component {
           <Table>
             <thead>
               <tr>
-                <th>Order #</th>
+                <th>Order ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Order Status</th>
@@ -36,48 +37,31 @@ class DashboardPage extends Component {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>
-                  <Input type="select">
-                    <option>Order Recieved</option>
-                    <option>Order Processed</option>
-                    <option>Production</option>
-                    <option>Scheduled for shipping</option>
-                    <option>Out for Delivery</option>
-                    <option>Delivered</option>
-                  </Input>
-                </td>
-                <td>March 3, 2018</td>
-                <td>
-                  <Button color="primary">Save</Button>
-                  <Button color="danger">Delete</Button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>Out for delivery</td>
-                <td>Febrary 21, 2018</td>
-                <td>
-                  <Button color="primary">Save</Button>
-                  <Button color="danger">Delete</Button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>Order Recieved</td>
-                <td>January 4, 2018</td>
-                <td>
-                  <Button color="primary">Save</Button>
-                  <Button color="danger">Delete</Button>
-                </td>
-              </tr>
+              {merchantCustomers.map(customer => (
+                <tr key={customer.id}>
+                  <th scope="row">{customer.id}</th>
+                  <td>{customer.data.firstName}</td>
+                  <td>{customer.data.lastName}</td>
+                  <td>
+                    <Input
+                      type="select"
+                      value={customer.data.orderStatus}
+                      onChange={event => console.log(event.target.value)}
+                    >
+                      <option value="recieved">Order Recieved</option>
+                      <option value="processed">Order Processed</option>
+                      <option value="production">Production</option>
+                      <option value="shipping">Scheduled for Shipping</option>
+                      <option value="outForDelivery">Out for Delivery</option>
+                      <option value="delivered">Delivered</option>
+                    </Input>
+                  </td>
+                  <td>{customer.data.updatedOn}</td>
+                  <td>
+                    <Button color="primary">Save</Button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </Table>
         </Row>
@@ -88,7 +72,8 @@ class DashboardPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    merchantInfo: state.merchant.merchantInfo
+    merchantInfo: state.merchant.merchantInfo,
+    merchantCustomers: state.merchant.merchantCustomers
   };
 };
 
