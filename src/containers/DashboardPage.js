@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Container, Row, Table, Button, Input } from 'reactstrap';
 
+import { firebase } from '../firebase';
 import withAuthorization from './withAuthorization';
+import { getCurrentUser } from '../actions/MerchantActions';
 
 class DashboardPage extends Component {
+  componentDidMount() {
+    this.props.getCurrentUser();
+  }
+
   render() {
     return (
       <Container>
         <Row>
-          <h1>Welcome, [Company Name]</h1>
+          <h1>Welcome, {this.props.merchantInfo.companyName}</h1>
         </Row>
         <Row>
           <ul className="orders-list">
@@ -79,8 +86,10 @@ class DashboardPage extends Component {
   }
 }
 
-// const authCondition = (authUser) => !!authUser;
-// export default withAuthorization(authCondition)(DashboardPage);
+const mapStateToProps = state => {
+  return {
+    merchantInfo: state.merchant.merchantInfo
+  };
+};
 
-
-export default DashboardPage;
+export default connect(mapStateToProps, { getCurrentUser })(DashboardPage);

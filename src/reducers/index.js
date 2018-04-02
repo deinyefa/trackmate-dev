@@ -4,11 +4,12 @@ import { firebaseStateReducer } from 'react-redux-firebase';
 import { firestoreReducer } from 'redux-firestore';
 
 import AuthReducer from './AuthReducer';
-import CustomerReducer from './CustomerReducer';
+import MerchantReducer from './MerchantReducer';
 
 export default combineReducers({
   auth: AuthReducer,
   form: formReducer,
+  merchant: MerchantReducer,
   firebase: firebaseStateReducer,
   firestore: firestoreReducer
 });
