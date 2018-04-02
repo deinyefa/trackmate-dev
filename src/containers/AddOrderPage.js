@@ -7,6 +7,7 @@ import {
   Col,
   FormGroup,
   Form,
+  FormFeedback,
   Label,
   FormText,
   Button,
@@ -31,6 +32,7 @@ class AddOrderPage extends Component {
     addAnOrder(orderID, lastName, firstName, orderStatus);
     event.preventDefault();
   };
+
   render() {
     const {
       inputAnOrder,
@@ -42,7 +44,12 @@ class AddOrderPage extends Component {
       orderError
     } = this.props;
 
-    const isInvalid = orderID === '' || lastName === '' || firstName === '';
+    const isInvalid =
+      orderID === '' ||
+      orderID.length < 8 ||
+      lastName === '' ||
+      firstName === '' ||
+      orderStatus === '';
 
     return (
       <Container fluid>
@@ -63,14 +70,24 @@ class AddOrderPage extends Component {
                 name="orderID"
                 component="input"
                 placeholder="ex. A70T4Y88"
-                className="form-control"
+                className={
+                  orderError ? 'form-control is-invalid' : 'form-control'
+                }
                 onChange={event =>
                   inputAnOrder({ prop: 'orderID', value: event.target.value })
                 }
                 value={orderID}
               />
+              {orderError ? (
+                <FormFeedback>
+                  Whoops! That Order ID is already in use.
+                </FormFeedback>
+              ) : (
+                ''
+              )}
               <FormText>
-                A unique 8 digit alphanumeric value given to each customer
+                A unique alphanumeric value given to each customer. At least 8
+                characters long.
               </FormText>
             </FormGroup>
             <Row>

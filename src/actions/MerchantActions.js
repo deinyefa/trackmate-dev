@@ -48,7 +48,7 @@ export const addAnOrder = (orderID, lastName, firstName, orderStatus) => {
           dispatch({
             type: EXISTING_ID,
             payload:
-              'Order number exists, please update the order number and try again'
+              'Oh no! Looks like something went wrong.'
           });
         } else {
           customersRef.set(customerData);

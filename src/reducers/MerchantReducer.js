@@ -5,7 +5,13 @@ import {
   ADD_ORDER_SUCCESS
 } from '../actions/types';
 
-const INITIAL_STATE = { merchantInfo: {} };
+const INITIAL_STATE = {
+  merchantInfo: {},
+  orderID: '',
+  firstName: '',
+  lastName: '',
+  orderStatus: ''
+};
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -18,7 +24,14 @@ export default (state = INITIAL_STATE, action) => {
         [action.payload.prop]: action.payload.value
       };
     case EXISTING_ID:
-      return { ...state, orderError: action.payload };
+      return {
+        ...state,
+        orderError: action.payload,
+        orderID: '',
+        lastName: '',
+        firstName: '',
+        orderStatus: ''
+      };
     case ADD_ORDER_SUCCESS:
       return {
         ...state,
