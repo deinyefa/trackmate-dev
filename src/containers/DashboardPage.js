@@ -10,11 +10,11 @@ class DashboardPage extends Component {
   }
 
   render() {
-    const { merchantCustomers } = this.props;
+    const { merchantCustomers, merchantInfo, updateOrderStatus } = this.props;
     return (
       <Container>
         <Row>
-          <h1>Welcome, {this.props.merchantInfo.companyName}</h1>
+          <h1>Welcome, {merchantInfo.companyName}</h1>
         </Row>
         <Row>
           <ul className="orders-list">

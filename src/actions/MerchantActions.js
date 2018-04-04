@@ -44,27 +44,6 @@ export const inputAnOrder = ({ prop, value }) => {
   };
 };
 
-export const updateOrderStatus = (id, value) => {
-  return dispatch => {
-    console.log('inside updateOrderStatus');
-    let currentMerchant = firebase.auth.currentUser.uid;
-
-    firebase.db
-      .collection('companies')
-      .doc(currentMerchant)
-      .collection('customers')
-      .doc(id)
-      .update({
-        orderStatus: value,
-        updatedOn: moment().format('MMMM Do YYYY, h:mm:ss a')
-      })
-      .then(() => {
-        dispatch({ type: UPDATE_ORDER, payload: { id, value } });
-      })
-      .catch(error => console.log('Error updating document: ', error));
-  };
-};
-
 export const addAnOrder = (orderID, lastName, firstName, orderStatus) => {
   return dispatch => {
     let customerData = {
@@ -98,5 +77,26 @@ export const addAnOrder = (orderID, lastName, firstName, orderStatus) => {
         }
       })
       .catch(error => console.log('Error getting document: ', error));
+  };
+};
+
+export const updateOrderStatus = (id, value) => {
+  return dispatch => {
+    console.log('update an order');
+    let currentMerchant = firebase.auth.currentUser.uid;
+
+    firebase.db
+      .collection('companies')
+      .doc(currentMerchant)
+      .collection('customers')
+      .doc(id)
+      .update({
+        orderStatus: value,
+        updatedOn: moment().format('MMMM Do YYYY, h:mm:ss a')
+      })
+      .then(() => {
+        dispatch({ type: UPDATE_ORDER, payload: { id, value } });
+      })
+      .catch(error => console.log('Error updating document: ', error));
   };
 };
