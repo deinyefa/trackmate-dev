@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Row, Table, Button, Input } from 'reactstrap';
+import { Container, Row, Table, Input } from 'reactstrap';
 
-import { firebase } from '../firebase';
-import withAuthorization from './withAuthorization';
-import { getCurrentUser } from '../actions/MerchantActions';
+import { getCurrentUser, updateOrderStatus } from '../actions/MerchantActions';
 
 class DashboardPage extends Component {
   componentDidMount() {
@@ -33,7 +31,6 @@ class DashboardPage extends Component {
                 <th>Last Name</th>
                 <th>Order Status</th>
                 <th>Updated on</th>
-                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -46,7 +43,9 @@ class DashboardPage extends Component {
                     <Input
                       type="select"
                       value={customer.data.orderStatus}
-                      onChange={event => console.log(event.target.value)}
+                      onChange={event =>
+                        updateOrderStatus(customer.id, event.target.value)
+                      }
                     >
                       <option value="recieved">Order Recieved</option>
                       <option value="processed">Order Processed</option>
@@ -57,9 +56,6 @@ class DashboardPage extends Component {
                     </Input>
                   </td>
                   <td>{customer.data.updatedOn}</td>
-                  <td>
-                    <Button color="primary">Save</Button>
-                  </td>
                 </tr>
               ))}
             </tbody>
@@ -77,4 +73,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getCurrentUser })(DashboardPage);
+export default connect(mapStateToProps, { getCurrentUser, updateOrderStatus })(
+  DashboardPage
+);

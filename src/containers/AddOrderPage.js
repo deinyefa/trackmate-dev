@@ -13,8 +13,6 @@ import {
   Button,
   Alert
 } from 'reactstrap';
-import { firebase } from '../firebase';
-import moment from 'moment';
 
 import { inputAnOrder, addAnOrder } from '../actions';
 
@@ -172,7 +170,13 @@ class AddOrderPage extends Component {
           {orderAdded ? (
             <Col>
               <p>Trackmate Notification URL</p>
-              <a href="https://google.com" target="_blank">{trackmateURL}</a>
+              <a
+                href="https://google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {trackmateURL}
+              </a>
             </Col>
           ) : (
             ''

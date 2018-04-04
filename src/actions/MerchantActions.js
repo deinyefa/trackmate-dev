@@ -5,7 +5,8 @@ import {
   ADD_ORDER_VALUES,
   EXISTING_ID,
   ADD_ORDER_SUCCESS,
-  ORDERS_LIST
+  ORDERS_LIST,
+  UPDATE_ORDER
 } from './types';
 
 export const getCurrentUser = () => {
@@ -31,7 +32,7 @@ export const getCurrentUser = () => {
         merchantCustomers.push({ id: doc.id, data: doc.data() });
       });
       dispatch({ type: ORDERS_LIST, payload: merchantCustomers });
-      console.log(merchantCustomers);
+      // console.log(merchantCustomers);
     });
   };
 };
@@ -43,6 +44,27 @@ export const inputAnOrder = ({ prop, value }) => {
   };
 };
 
+export const updateOrderStatus = (id, value) => {
+  return dispatch => {
+    console.log('inside updateOrderStatus');
+    let currentMerchant = firebase.auth.currentUser.uid;
+
+    firebase.db
+      .collection('companies')
+      .doc(currentMerchant)
+      .collection('customers')
+      .doc(id)
+      .update({
+        orderStatus: value,
+        updatedOn: moment().format('MMMM Do YYYY, h:mm:ss a')
+      })
+      .then(() => {
+        dispatch({ type: UPDATE_ORDER, payload: { id, value } });
+      })
+      .catch(error => console.log('Error updating document: ', error));
+  };
+};
+
 export const addAnOrder = (orderID, lastName, firstName, orderStatus) => {
   return dispatch => {
     let customerData = {
@@ -50,7 +72,7 @@ export const addAnOrder = (orderID, lastName, firstName, orderStatus) => {
       lastName,
       firstName,
       orderStatus,
-      updatedOn: moment().format('MMM D, YYYY')
+      updatedOn: moment().format('MMMM Do YYYY, h:mm:ss a')
     };
     let customersRef = firebase.db
       .collection('companies')
@@ -75,6 +97,6 @@ export const addAnOrder = (orderID, lastName, firstName, orderStatus) => {
           });
         }
       })
-      .catch(error => console.log('error getting document: ', error));
+      .catch(error => console.log('Error getting document: ', error));
   };
 };
