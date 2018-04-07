@@ -34,7 +34,8 @@ body {
   .side-bar .menu-push-down {
     position: absolute;
     width: 100%;
-    bottom: 0; }
+    bottom: 0;
+    padding-bottom: 2em; }
   .side-bar .menu li a {
     color: white;
     text-decoration: none;
@@ -184,3 +185,9 @@ label.field-label, .form-text, .invalid-feedback {
 .alert {
   margin: auto;
   width: 80%; }
+
+/* DASHBOARD */
+.table-container {
+  width: 90%; }
+  .table-container th:last-child {
+    width: 18%; }

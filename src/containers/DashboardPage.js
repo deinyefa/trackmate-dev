@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Row, Table, Input } from 'reactstrap';
+import { Container, Row, Table } from 'reactstrap';
 
 import { getCurrentUser, updateOrderStatus } from '../actions/MerchantActions';
 
@@ -12,7 +12,7 @@ class DashboardPage extends Component {
   render() {
     const { merchantCustomers, merchantInfo, updateOrderStatus } = this.props;
     return (
-      <Container>
+      <Container fluid className="table-container">
         <Row>
           <h1>Welcome, {merchantInfo.companyName}</h1>
         </Row>
@@ -23,7 +23,7 @@ class DashboardPage extends Component {
           </ul>
         </Row>
         <Row>
-          <Table>
+          <Table striped>
             <thead>
               <tr>
                 <th>Order ID</th>
@@ -40,8 +40,9 @@ class DashboardPage extends Component {
                   <td>{customer.data.firstName}</td>
                   <td>{customer.data.lastName}</td>
                   <td>
-                    <Input
+                    <select
                       type="select"
+                      className="custom-select"
                       value={customer.data.orderStatus}
                       onChange={event =>
                         updateOrderStatus(customer.id, event.target.value)
@@ -53,7 +54,7 @@ class DashboardPage extends Component {
                       <option value="shipping">Scheduled for Shipping</option>
                       <option value="outForDelivery">Out for Delivery</option>
                       <option value="delivered">Delivered</option>
-                    </Input>
+                    </select>
                   </td>
                   <td>{customer.data.updatedOn}</td>
                 </tr>

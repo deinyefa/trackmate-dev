@@ -50,19 +50,17 @@ export default (state = INITIAL_STATE, action) => {
     case ORDERS_LIST:
       return { ...state, merchantCustomers: action.payload };
     case UPDATE_ORDER:
-      let cloneMerchantCustomers = state.merchantCustomers;
-      let removedIndex = cloneMerchantCustomers
+      let newMerchantCustomers = state.merchantCustomers;
+      let updateIndex = newMerchantCustomers
         .map(item => {
           return item.id;
         })
         .indexOf(action.payload.id);
-      let removed = cloneMerchantCustomers.splice(removedIndex, 1)[0];
-      console.log(removed);
 
-      removed.data.orderStatus = action.payload.value;
-      
+      newMerchantCustomers[updateIndex].data.orderStatus = action.payload.value;
+      console.log(newMerchantCustomers[updateIndex].data.orderStatus);
 
-      return { ...state, merchantCustomers: cloneMerchantCustomers };
+      return { ...state, merchantCustomers: newMerchantCustomers };
     default:
       return { ...state, orderAdded: null, orderError: null };
   }

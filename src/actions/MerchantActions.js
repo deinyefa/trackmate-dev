@@ -82,7 +82,6 @@ export const addAnOrder = (orderID, lastName, firstName, orderStatus) => {
 
 export const updateOrderStatus = (id, value) => {
   return dispatch => {
-    console.log('update an order');
     let currentMerchant = firebase.auth.currentUser.uid;
 
     firebase.db
@@ -92,7 +91,7 @@ export const updateOrderStatus = (id, value) => {
       .doc(id)
       .update({
         orderStatus: value,
-        updatedOn: moment().format('MMMM Do YYYY, h:mm:ss a')
+        updatedOn: moment().format('MMMM Do YYYY h:mm:ss a')
       })
       .then(() => {
         dispatch({ type: UPDATE_ORDER, payload: { id, value } });
