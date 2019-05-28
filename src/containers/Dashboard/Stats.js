@@ -1,14 +1,14 @@
 import React from "react";
-import {
-  Row,
-  Col,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter
-} from 'reactstrap';
+import { Row, Col, Card, CardHeader, CardBody, CardFooter } from "reactstrap";
 import { Link } from "react-router-dom";
-
+import {
+	MdPriorityHigh,
+	MdWarning,
+	MdReceipt,
+	MdLocalOffer,
+	MdDoneAll,
+	MdQueue,
+} from "react-icons/md";
 
 import * as ROUTES from "../../constants/routes";
 
@@ -21,9 +21,9 @@ const Stats = props => {
 						data-background-color="orange"
 						className="card-header-icon">
 						<div className="card-icon">
-							{/* <i className="material-icons">
+							<i className="material-icons">
 								<MdPriorityHigh />
-							</i> */}
+							</i>
 						</div>
 					</CardHeader>
 					<CardBody className="card-content">
@@ -32,9 +32,9 @@ const Stats = props => {
 					</CardBody>
 					<CardFooter>
 						<div className="stats">
-							{/* <i className="material-icons text-danger">
+							<i className="material-icons text-danger">
 								<MdWarning />
-							</i> */}
+							</i>
 							<Link to={ROUTES.ORDERS}>View orders</Link>
 						</div>
 					</CardFooter>
@@ -43,9 +43,9 @@ const Stats = props => {
 			<Col md={4}>
 				<Card className="card card-stats">
 					<CardHeader data-background-color="purple">
-						{/* <i className="material-icons">
+						<i className="material-icons">
 							<MdReceipt />
-						</i> */}
+						</i>
 					</CardHeader>
 					<CardBody className="card-content">
 						<p className="category">Total Orders</p>
@@ -53,9 +53,9 @@ const Stats = props => {
 					</CardBody>
 					<CardFooter>
 						<div className="stats">
-							{/* <i className="material-icons">
+							<i className="material-icons">
 								<MdLocalOffer />
-							</i> */}
+							</i>
 							Tracked from the cloud
 						</div>
 					</CardFooter>
@@ -64,9 +64,9 @@ const Stats = props => {
 			<Col md={4}>
 				<Card className="card card-stats">
 					<CardHeader data-background-color="green">
-						{/* <i className="material-icons">
+						<i className="material-icons">
 							<MdDoneAll />
-						</i> */}
+						</i>
 					</CardHeader>
 					<CardBody className="card-content">
 						<p className="category">Closed Orders</p>
@@ -75,9 +75,9 @@ const Stats = props => {
 					<CardFooter>
 						<div className="stats">
 							<Link to={ROUTES.ADD_ORDER}>
-								{/* <i className="material-icons">
+								<i className="material-icons">
 									<MdQueue />
-								</i> */}
+								</i>
 								Add more
 							</Link>
 						</div>

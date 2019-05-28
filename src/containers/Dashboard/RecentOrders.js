@@ -74,7 +74,7 @@ class RecentOrders extends Component {
 
 		return (
 			<Row className="orders-table">
-				<Col md={12}>
+				<Col md={12} className="card">
 					<CardHeader
 						className="table-header"
 						data-background-color="blue">

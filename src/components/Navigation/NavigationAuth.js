@@ -1,10 +1,20 @@
 import React, { Component } from "react";
 import { Link, Route } from "react-router-dom";
 import { Navbar, Container } from "reactstrap";
+import {
+	MdDashboard,
+	MdReceipt,
+	MdAddBox,
+	MdInfo,
+	MdSettings,
+	MdCreditCard,
+	MdMenu,
+} from "react-icons/md";
 
 import * as ROUTES from "../../constants/routes";
-import { withAuthentication } from '../Session';
+import { withAuthentication } from "../Session";
 import SignOutButton from "../SignOut";
+import NavigationAuthStyles from "./Navigation.module.css";
 
 import DashboardPage from "../../containers/Dashboard";
 import OrdersListPage from "../../containers/Orders/OrdersList";
@@ -59,7 +69,7 @@ class NavigationAuth extends Component {
 	};
 
 	componentDidMount = () => {
-    const { firebase } = this.props;
+		const { firebase } = this.props;
 		let currentMerchant = firebase.auth.currentUser.uid;
 
 		firebase.db
@@ -76,61 +86,114 @@ class NavigationAuth extends Component {
 		this.setState({ isClicked: !this.state.isClicked });
 
 	render() {
-    let pushMenu = this.state.isClicked ? "clicked wrapper" : "wrapper";
-    const { merchantInfo } = this.state;
+		let pushMenu = this.state.isClicked
+			? [
+					NavigationAuthStyles.Clicked,
+					NavigationAuthStyles.Navigation,
+			  ].join(" ")
+			: NavigationAuthStyles.Navigation;
+		const { merchantInfo } = this.state;
 
 		return (
 			<div className={pushMenu}>
-				<div className="sidebar" data-color="purple">
-					<div className="logo">
-						<p className="simple-text pull-right">
+				<div
+					className={NavigationAuthStyles.Sidebar}
+					data-color="purple">
+					<div className={NavigationAuthStyles.Logo}>
+						<p className={`${NavigationAuthStyles.SimpleText} `}>
 							trackmate
 							<span
-								className="toggle-sidebar pull-right"
-								onClick={this.toggleSideBarMenu}
-							/>
+								className={`${
+									NavigationAuthStyles.ToggleSidebar
+								} float-right`}
+								onClick={this.toggleSideBarMenu}>
+								<i className="material-icons float-right">
+									<MdMenu />
+								</i>
+							</span>
 						</p>
+					</div>{" "}
+					<div className="sidebar-wrapper">
+						<ul className={NavigationAuthStyles.Nav}>
+							<ListItemLink
+								to={ROUTES.DASHBOARD}
+								className={NavigationAuthStyles.Nav_Item}>
+								<i className="material-icons float-right">
+									<MdDashboard />
+								</i>
+								<p>Dashboard</p>
+							</ListItemLink>
+							<ListItemLink
+								to={ROUTES.ORDERS}
+								className={NavigationAuthStyles.Nav_Item}>
+								<i className="material-icons float-right">
+									<MdReceipt />
+								</i>
+								<p>Orders</p>
+							</ListItemLink>
+							<ListItemLink
+								to={ROUTES.ADD_ORDER}
+								className={NavigationAuthStyles.Nav_Item}>
+								<i className="material-icons float-right">
+									<MdAddBox />
+								</i>
+								<p>Add Order</p>
+							</ListItemLink>
+							<aside
+								className={NavigationAuthStyles.MenuPushDown}>
+								<ListItemLink
+									to={ROUTES.HELP}
+									className={NavigationAuthStyles.Nav_Item}>
+									<i className="material-icons float-right">
+										<MdInfo />
+									</i>
+									<p>Help</p>
+								</ListItemLink>
+								<ListItemLink
+									to={ROUTES.SETTINGS}
+									className={NavigationAuthStyles.Nav_Item}>
+									<i className="material-icons float-right">
+										<MdSettings />
+									</i>
+									<p>Settings</p>
+								</ListItemLink>
+								<ListItemLink
+									to={ROUTES.BILLING}
+									className={NavigationAuthStyles.Nav_Item}>
+									<i className="material-icons float-right">
+										<MdCreditCard />
+									</i>
+									<p>Billing</p>
+								</ListItemLink>
+								<div
+									className={
+										NavigationAuthStyles.SignOutButton
+									}>
+									<SignOutButton />
+								</div>
+							</aside>
+						</ul>
 					</div>
 				</div>
-				<div className="sidebar-wrapper">
-					<ul className="nav">
-						<ListItemLink
-							to={ROUTES.DASHBOARD}
-							className="nav-item">
-							<p>Dashboard</p>
-						</ListItemLink>
-						<ListItemLink to={ROUTES.ORDERS} className="nav-item">
-							<p>Orders</p>
-						</ListItemLink>
-						<ListItemLink
-							to={ROUTES.ADD_ORDER}
-							className="nav-item">
-							<p>Add Order</p>
-						</ListItemLink>
-						<ListItemLink to={ROUTES.HELP} className="nav-item">
-							<p>Help</p>
-						</ListItemLink>
-						<ListItemLink to={ROUTES.SETTINGS} className="nav-item">
-							<p>Settings</p>
-						</ListItemLink>
-						<ListItemLink to={ROUTES.BILLING} className="nav-item">
-							<p>Billing</p>
-						</ListItemLink>
-					</ul>
-					<SignOutButton />
-				</div>
-				<div className="main-panel">
+				<div className={NavigationAuthStyles.MainPanel}>
 					<Navbar className="navbar-transparent navbar-absolute">
 						<Container fluid>
-							<div className="navbsr-header">
-								<span className="navbar-brand">
-                  { merchantInfo ? merchantInfo.companyName : ''}
+							<div
+								className="navbar-header"
+								style={{ marginLeft: "auto " }}>
+								<span
+									className={
+										NavigationAuthStyles.NavbarBrand
+									}>
+									{merchantInfo
+										? merchantInfo.companyName
+										: ""}
 									<span className="ripple-container" />
 								</span>
 							</div>
 						</Container>
 					</Navbar>
-					<section className="content">
+					<section className={NavigationAuthStyles.Content}>
 						<Container fluid>
 							{authRoutes.map(route => (
 								<Route
@@ -152,7 +215,7 @@ const ListItemLink = ({ to, ...rest }) => (
 	<Route
 		path={to}
 		children={({ match }) => (
-			<li className={match ? "active" : ""}>
+			<li className={match ? `${NavigationAuthStyles.active}` : ""}>
 				<Link to={to} {...rest} className="nav-link" />
 			</li>
 		)}
