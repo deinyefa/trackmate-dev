@@ -7,12 +7,16 @@ import { withAuthentication } from "../../components/Session";
 import * as ROUTES from "../../constants/routes";
 
 class RecentOrders extends Component {
+  state = {
+    orderStatus: ""
+  }
+
 	getRecentOrders = () => {
 		const updatedMerchantCustomers = [...this.props.merchantCustomers];
 		return updatedMerchantCustomers
 			.sort(obj => obj.data.createdAt)
 			.slice(0, 5);
-	};
+  };
 
 	updateOrderStatus = (id, value) => {
 		const { currentMerchant, firebase } = this.props;
@@ -27,7 +31,9 @@ class RecentOrders extends Component {
 				orderStatus: value,
 				updatedOn: new Date(),
 			})
-			.catch(err => console.log(err));
+      .catch(err => console.log(err));
+      
+      this.setState({ orderStatus: value });
 	};
 
 	render() {
@@ -40,7 +46,8 @@ class RecentOrders extends Component {
 					<select
 						type="select"
 						className="custom-select"
-						value={customer.data.orderStatus}
+            value={customer.data.orderStatus}
+            // defaultValue={this.state.orderStatus}
 						onChange={event =>
 							this.updateOrderStatus(
 								customer.id,

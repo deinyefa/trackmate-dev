@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Formik } from "formik";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import {
@@ -43,8 +42,21 @@ class SignUpFormBase extends Component {
 		this.props.firebase
 			.doCreateUserWithEmailAndPassword(email, passwordOne)
 			.then(authUser => {
-				this.setState({ ...INITIAL_STATE });
-				this.props.history.push(ROUTES.DASHBOARD);
+				this.props.firebase.db
+					.collection("companies")
+					.doc(authUser.uid)
+					.set(
+						{
+							companyName,
+							email,
+						},
+						{ merge: true }
+					)
+					.then(() => {
+						this.props.history.push(ROUTES.DASHBOARD);
+						this.setState({ ...INITIAL_STATE });
+					})
+					.catch(err => console.log(err));
 			})
 			.catch(error => {
 				this.setState({ ...this.state, error });
@@ -72,78 +84,70 @@ class SignUpFormBase extends Component {
 			companyName === "";
 
 		return (
-			<Formik
-				initialValues={INITIAL_STATE}
-				onSubmit={(values, actions) => this.onSubmit}
-				render={props => (
-					<form onSubmit={props.handleSubmit}>
-						<Row>
-							<Col>
-								<FormGroup>
-									<Label for="company">Company Name</Label>
-									<Input
-										id="company"
-										name="companyName"
-										value={companyName}
-										onChange={this.onChange}
-										type="text"
-										placeholder="An Awesome Small Business"
-									/>
-								</FormGroup>
-							</Col>
-						</Row>
-						<Row>
-							<Col>
-								<FormGroup>
-									<Label for="email">Email</Label>
-									<Input
-										id="email"
-										name="email"
-										value={email}
-										onChange={this.onChange}
-										type="email"
-										placeholder="orders@aasb.com"
-									/>
-								</FormGroup>
-							</Col>
-						</Row>
-						<Row>
-							<Col>
-								<FormGroup>
-									<Label for="passwordOne">Password</Label>
-									<Input
-										id="passwordOne"
-										name="passwordOne"
-										value={passwordOne}
-										onChange={this.onChange}
-										type="password"
-									/>
-								</FormGroup>
-							</Col>
-						</Row>
-						<Row>
-							<Col>
-								<FormGroup>
-									<Label for="passwordTwo">
-										Confirm Password
-									</Label>
-									<Input
-										id="passwordTwo"
-										name="passwordTwo"
-										value={passwordTwo}
-										onChange={this.onChange}
-										type="password"
-									/>
-								</FormGroup>
-							</Col>
-						</Row>
-						{error && <p>{error.message}</p>}
-						<Button type="submit" disabled={isInvalid}>
-							Register
-						</Button>
-					</form>
-				)}
-			/>
+			<form onSubmit={this.onSubmit}>
+				<Row>
+					<Col>
+						<FormGroup>
+							<Label for="company">Company Name</Label>
+							<Input
+								id="company"
+								name="companyName"
+								value={companyName}
+								onChange={this.onChange}
+								type="text"
+								placeholder="An Awesome Small Business"
+							/>
+						</FormGroup>
+					</Col>
+				</Row>
+				<Row>
+					<Col>
+						<FormGroup>
+							<Label for="email">Email</Label>
+							<Input
+								id="email"
+								name="email"
+								value={email}
+								onChange={this.onChange}
+								type="email"
+								placeholder="orders@aasb.com"
+							/>
+						</FormGroup>
+					</Col>
+				</Row>
+				<Row>
+					<Col>
+						<FormGroup>
+							<Label for="passwordOne">Password</Label>
+							<Input
+								id="passwordOne"
+								name="passwordOne"
+								value={passwordOne}
+								onChange={this.onChange}
+								type="password"
+							/>
+						</FormGroup>
+					</Col>
+				</Row>
+				<Row>
+					<Col>
+						<FormGroup>
+							<Label for="passwordTwo">Confirm Password</Label>
+							<Input
+								id="passwordTwo"
+								name="passwordTwo"
+								value={passwordTwo}
+								onChange={this.onChange}
+								type="password"
+							/>
+						</FormGroup>
+					</Col>
+				</Row>
+				{error && <p>{error.message}</p>}
+				<Button type="submit" disabled={isInvalid}>
+					Register
+				</Button>
+			</form>
 		);
 	}
 }

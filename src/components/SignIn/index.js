@@ -12,7 +12,6 @@ import {
 	Button,
 	Alert,
 } from "reactstrap";
-import { Formik } from "formik";
 import { compose } from "recompose";
 
 import { withFirebase } from "../Firebase";
