@@ -5,7 +5,7 @@ import {
 	MdPriorityHigh,
 	MdWarning,
 	MdReceipt,
-	MdLocalOffer,
+	MdCloud,
 	MdDoneAll,
 	MdQueue,
 } from "react-icons/md";
@@ -54,7 +54,7 @@ const Stats = props => {
 					<CardFooter>
 						<div className="stats">
 							<i className="material-icons">
-								<MdLocalOffer />
+								<MdCloud />
 							</i>
 							Tracked from the cloud
 						</div>

@@ -10,6 +10,7 @@ import {
 } from "reactstrap";
 import moment from "moment";
 
+import TableStyles from "../../../Styles/Table.module.css";
 import { withAuthentication } from "../../../components/Session";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 
@@ -101,15 +102,15 @@ class OrdersList extends Component {
 					<Col md={12}>
 						<Card>
 							<CardHeader data-background-color="blue">
-								<h4 className="title">Orders</h4>
+								<h2 className="title">Orders</h2>
 								<p className="category">
 									Your customers get notified when their order
 									is updated
 								</p>
 							</CardHeader>
 							<CardBody className="card-content table-responsive">
-								<Table responsive size="sm">
-									<thead className="text-primary">
+								<Table responsive size="sm" className={TableStyles.Table}>
+									<thead className={`text-primary ${TableStyles.Thead}`}>
 										<tr>
 											<th
 												onClick={event =>
@@ -149,7 +150,7 @@ class OrdersList extends Component {
 											</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody className={TableStyles.Tbody}>
 										{this.state.merchantCustomers.length <=
 										0 ? (
 											<tr>
@@ -161,7 +162,7 @@ class OrdersList extends Component {
 											this.state.merchantCustomers.map(
 												customer => (
 													<tr key={customer.id}>
-														<th>{customer.id}</th>
+														<td>{customer.id}</td>
 														<td>
 															{
 																customer.data
@@ -177,7 +178,9 @@ class OrdersList extends Component {
 														<td>
 															<select
 																type="select"
-																className="custom-select"
+																className={
+																	TableStyles.CustomSelect
+																}
 																value={
 																	customer
 																		.data

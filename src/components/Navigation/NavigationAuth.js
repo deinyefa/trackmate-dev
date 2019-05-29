@@ -197,7 +197,7 @@ class NavigationAuth extends Component {
 						</Container>
 					</Navbar>
 					<section className={NavigationAuthStyles.Content}>
-						<Container fluid>
+						<Container>
 							{authRoutes.map(route => (
 								<Route
 									key={route.path}

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
 	Container,
 	Row,
@@ -91,7 +91,7 @@ class AddOrderPage extends Component {
 			orderStatus === "";
 
 		return (
-			<Container fluid className="card">
+			<div className="card">
 				<Row className="card-header" data-background-color="green">
 					<h1>Add An Order</h1>
 				</Row>
@@ -248,7 +248,7 @@ class AddOrderPage extends Component {
 						</Col>
 					) : null}
 				</Row>
-			</Container>
+			</div>
 		);
 	}
 }

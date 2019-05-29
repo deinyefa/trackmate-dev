@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import { Row, Table, Col, CardHeader, CardBody, CardFooter } from "reactstrap";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import { MdQueue } from "react-icons/md";
 
-import { withAuthentication } from "../../components/Session";
 import * as ROUTES from "../../constants/routes";
+
+import TableStyles from "../../Styles/Table.module.css";
+import { withAuthentication } from "../../components/Session";
 import Spinner from "../../components/UI/Spinner/Spinner";
 
 class RecentOrders extends Component {
@@ -46,47 +49,51 @@ class RecentOrders extends Component {
 			</tr>
 		);
 		if (this.props.merchantCustomers.length > 0) {
-		  recentOrders = this.getRecentOrders().map(customer => (
-		    <tr key={customer.id}>
-		      <th scope="row">{customer.id}</th>
-		      <td>{customer.data.firstName}</td>
-		      <td>{customer.data.lastName}</td>
-		      <td>
-		        <select
-		          type="select"
-		          className="custom-select"
-		          value={customer.data.orderStatus}
-		          // defaultValue={this.state.orderStatus}
-		          onChange={event =>
-		            this.updateOrderStatus(
-		              customer.id,
-		              event.target.value
-		            )
-		          }>
-		          <option value="Order Recieved">Order Recieved</option>
-		          <option value="Order Processed">Order Processed</option>
-		          <option value="In Production">In Production</option>
-		          <option value="Scheduled for Shipping">
-		            Scheduled for Shipping
-		          </option>
-		          <option value="Out For Delivery">
-		            Out for Delivery
-		          </option>
-		          <option value="Delivered">Delivered</option>
-		        </select>
-		      </td>
-		      <td>
-		        {moment(customer.data.updatedOn.toDate()).format(
-		          "MMM D YYYY, HH:mm:ss"
-		        )}
-		      </td>
-		      <td>
-		        {moment(customer.data.createdAt.toDate()).format(
-		          "MMM D YYYY, HH:mm:ss"
-		        )}
-		      </td>
-		    </tr>
-		  ));
+			recentOrders = this.getRecentOrders().map(customer => (
+				<tr key={customer.id}>
+					<th scope="row">{customer.id}</th>
+					<td>{customer.data.firstName}</td>
+					<td>{customer.data.lastName}</td>
+					<td>
+						<select
+							type="select"
+							className={TableStyles.CustomSelect}
+							value={customer.data.orderStatus}
+							// defaultValue={this.state.orderStatus}
+							onChange={event =>
+								this.updateOrderStatus(
+									customer.id,
+									event.target.value
+								)
+							}>
+							<option value="Order Recieved">
+								Order Recieved
+							</option>
+							<option value="Order Processed">
+								Order Processed
+							</option>
+							<option value="In Production">In Production</option>
+							<option value="Scheduled for Shipping">
+								Scheduled for Shipping
+							</option>
+							<option value="Out For Delivery">
+								Out for Delivery
+							</option>
+							<option value="Delivered">Delivered</option>
+						</select>
+					</td>
+					<td>
+						{moment(customer.data.updatedOn.toDate()).format(
+							"MMM D YYYY, HH:mm:ss"
+						)}
+					</td>
+					<td>
+						{moment(customer.data.createdAt.toDate()).format(
+							"MMM D YYYY, HH:mm:ss"
+						)}
+					</td>
+				</tr>
+			));
 		}
 
 		return (
@@ -95,14 +102,18 @@ class RecentOrders extends Component {
 					<CardHeader
 						className="table-header"
 						data-background-color="blue">
-						<h4 className="title">Recent Orders</h4>
+						<h2 className="title">Recent Orders</h2>
 						<p className="category">
 							View your 5 most recent orders here
 						</p>
 					</CardHeader>
 					<CardBody className="card-content table-responsive">
-						<Table responsive size="sm">
-							<thead className="text-primary">
+						<Table
+							responsive
+							size="sm"
+							className={TableStyles.Table}>
+							<thead
+								className={`text-primary ${TableStyles.Thead}`}>
 								<tr>
 									<th>Order ID</th>
 									<th className="wider">First Name</th>
@@ -112,14 +123,17 @@ class RecentOrders extends Component {
 									<th>Created</th>
 								</tr>
 							</thead>
-							<tbody>{recentOrders}</tbody>
+							<tbody className={TableStyles.Tbody}>
+								{recentOrders}
+							</tbody>
 						</Table>
 					</CardBody>
 					<CardFooter className="text-center table-footer">
 						<div className="text-primary mt-3 stats">
-							<Link
-								to={ROUTES.ORDERS}
-								className="btn btn-outline-primary">
+							<Link to={ROUTES.ORDERS}>
+								<i className="material-icons">
+									<MdQueue />
+								</i>
 								View All
 							</Link>
 						</div>
