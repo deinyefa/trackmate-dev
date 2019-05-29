@@ -1,10 +1,54 @@
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+	font-family: "Raleway", sans-serif;
+}
+
 body {
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-		"Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-		"Helvetica Neue", sans-serif;
+	font-family: "Open Sans", "Roboto", "Helvetica Neue", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+.text-primary {
+	color: #00acc1 !important;
+}
+
+*[class*="btn-primary"] {
+	border-color: #00acc1;
+	color: #00acc1;
+}
+*[class*="btn-primary"]:hover {
+	border-color: #00acc1;
+	background-color: #00acc1;
+}
+*[class*="btn-outline-primary"] {
+	color: #00acc1;
+	border-color: #00acc1;
+}
+*[class*="btn-outline-primary"]:hover {
+	border-color: #00acc1;
+  background-color: #00acc1;
+}
+*[class*="disabled"] {
+  cursor: not-allowed;
+  border-color: #ccc;
+  color: #ccc !important;
+}
+*[class*="disabled"]:hover {
+  border-color: #ccc;
+  color: #ccc;
+  background-color: transparent;
 }
 
 code {

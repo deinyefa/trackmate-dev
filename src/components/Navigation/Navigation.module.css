@@ -132,7 +132,10 @@
 }
 
 .MainPanel .NavBar {
-	margin-bottom: 0;
+  border-bottom: 1px solid;
+  padding-bottom: 1em;
+  padding-top: 2em;
+  margin: 0 15px;
 }
 
 .Sidebar,

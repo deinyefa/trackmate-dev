@@ -99,7 +99,7 @@ class OrdersList extends Component {
 				<Row>
 					<Col md={12}>
 						<Card>
-							<CardHeader data-background-color="purple">
+							<CardHeader data-background-color="blue">
 								<h4 className="title">Orders</h4>
 								<p className="category">
 									Your customers get notified when their order

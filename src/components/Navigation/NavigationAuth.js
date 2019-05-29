@@ -176,7 +176,10 @@ class NavigationAuth extends Component {
 					</div>
 				</div>
 				<div className={NavigationAuthStyles.MainPanel}>
-					<Navbar className="navbar-transparent navbar-absolute">
+					<Navbar
+						className={`navbar-transparent navbar-absolute ${
+							NavigationAuthStyles.NavBar
+						}`}>
 						<Container fluid>
 							<div
 								className="navbar-header"

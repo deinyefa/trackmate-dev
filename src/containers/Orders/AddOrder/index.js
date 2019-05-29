@@ -91,17 +91,21 @@ class AddOrderPage extends Component {
 			orderStatus === "";
 
 		return (
-			<Container fluid>
-				<Row>
+			<Container fluid className="card">
+				<Row className="card-header" data-background-color="green">
 					<h1>Add An Order</h1>
+				</Row>
+				<Row className="card-body">
 					{orderError ? (
-						<Alert color="danger">{orderError}</Alert>
+						<Alert color="danger" style={{ margin: "auto" }}>
+							{orderError}
+						</Alert>
 					) : null}
 					{orderAdded ? (
-						<Alert color="success">{orderAdded}</Alert>
+						<Alert color="success" style={{ margin: "auto" }}>
+							{orderAdded}
+						</Alert>
 					) : null}
-				</Row>
-				<Row>
 					<Form onSubmit={this.onSubmit} className="m-auto py-4">
 						<FormGroup>
 							<Label for="orderID" className="field-label">
@@ -117,12 +121,13 @@ class AddOrderPage extends Component {
 										? "form-control is-invalid"
 										: "form-control"
 								}
-								onChange={event =>
+								onChange={event => {
+									this.setState({ orderError: "" });
 									this.inputAnOrder({
 										prop: "orderID",
-										value: event.target.value,
-									})
-								}
+										value: event.target.value.trim(),
+									});
+								}}
 								value={orderID}
 							/>
 							{orderError ? (
@@ -226,7 +231,13 @@ class AddOrderPage extends Component {
 				</Row>
 				<Row>
 					{orderAdded ? (
-						<Col>
+						<Col
+							style={{
+								borderTop: "1px solid",
+								margin: "1em 2em",
+								padding: "1em",
+								borderColor: "#43a047",
+							}}>
 							<p>Trackmate Notification URL</p>
 							<a
 								href="https://google.com"

@@ -100,7 +100,7 @@ class RecentOrders extends Component {
 					</CardBody>
 					<CardFooter className="text-center table-footer">
 						<div className="text-primary mt-3 stats">
-							<Link to={ROUTES.ORDERS}>View All</Link>
+							<Link to={ROUTES.ORDERS} className="btn btn-outline-primary" >View All</Link>
 						</div>
 					</CardFooter>
 				</Col>
