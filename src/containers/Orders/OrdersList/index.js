@@ -11,6 +11,7 @@ import {
 import moment from "moment";
 
 import { withAuthentication } from "../../../components/Session";
+import Spinner from "../../../components/UI/Spinner/Spinner";
 
 class OrdersList extends Component {
 	state = {
@@ -90,7 +91,7 @@ class OrdersList extends Component {
 				break;
 		}
 		this.setState({ merchantCustomers: updatedMerchantCustomers });
-    console.log(this.state.merchantCustomers);
+		console.log(this.state.merchantCustomers);
 	};
 
 	render() {
@@ -149,70 +150,88 @@ class OrdersList extends Component {
 										</tr>
 									</thead>
 									<tbody>
-										{this.state.merchantCustomers.map(
-											customer => (
-												<tr key={customer.id}>
-													<th>{customer.id}</th>
-													<td>
-														{
-															customer.data
-																.firstName
-														}
-													</td>
-													<td>
-														{customer.data.lastName}
-													</td>
-													<td>
-														<select
-															type="select"
-															className="custom-select"
-															value={
+										{this.state.merchantCustomers.length <=
+										0 ? (
+											<tr>
+												<td colSpan="6">
+													<Spinner />
+												</td>
+											</tr>
+										) : (
+											this.state.merchantCustomers.map(
+												customer => (
+													<tr key={customer.id}>
+														<th>{customer.id}</th>
+														<td>
+															{
 																customer.data
-																	.orderStatus
+																	.firstName
 															}
-															onChange={event =>
-																this.updateOrderStatus(
-																	customer.id,
-																	event.target
-																		.value
-																)
-															}>
-															<option value="Order Recieved">
-																Order Recieved
-															</option>
-															<option value="Order Processed">
-																Order Processed
-															</option>
-															<option value="In Production">
-																In Production
-															</option>
-															<option value="Scheduled for Shipping">
-																Scheduled for
-																Shipping
-															</option>
-															<option value="Out For Delivery">
-																Out for Delivery
-															</option>
-															<option value="Delivered">
-																Delivered
-															</option>
-														</select>
-													</td>
-													<td>
-														{moment(
-															customer.data.updatedOn.toDate()
-														).format(
-															"MMM D YYYY, HH:mm:ss"
-														)}
-													</td>
-													<td>
-														{moment(
-															customer.data.createdAt.toDate()
-														).format(
-															"MMM D YYYY, HH:mm:ss"
-														)}
-													</td>
-												</tr>
+														</td>
+														<td>
+															{
+																customer.data
+																	.lastName
+															}
+														</td>
+														<td>
+															<select
+																type="select"
+																className="custom-select"
+																value={
+																	customer
+																		.data
+																		.orderStatus
+																}
+																onChange={event =>
+																	this.updateOrderStatus(
+																		customer.id,
+																		event
+																			.target
+																			.value
+																	)
+																}>
+																<option value="Order Recieved">
+																	Order
+																	Recieved
+																</option>
+																<option value="Order Processed">
+																	Order
+																	Processed
+																</option>
+																<option value="In Production">
+																	In
+																	Production
+																</option>
+																<option value="Scheduled for Shipping">
+																	Scheduled
+																	for Shipping
+																</option>
+																<option value="Out For Delivery">
+																	Out for
+																	Delivery
+																</option>
+																<option value="Delivered">
+																	Delivered
+																</option>
+															</select>
+														</td>
+														<td>
+															{moment(
+																customer.data.updatedOn.toDate()
+															).format(
+																"MMM D YYYY, HH:mm:ss"
+															)}
+														</td>
+														<td>
+															{moment(
+																customer.data.createdAt.toDate()
+															).format(
+																"MMM D YYYY, HH:mm:ss"
+															)}
+														</td>
+													</tr>
+												)
 											)
 										)}
 									</tbody>
