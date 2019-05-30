@@ -66,20 +66,17 @@ class RecentOrders extends Component {
 									event.target.value
 								)
 							}>
-							<option value="Order Recieved">
-								Order Recieved
-							</option>
-							<option value="Order Processed">
-								Order Processed
-							</option>
-							<option value="In Production">In Production</option>
-							<option value="Scheduled for Shipping">
+							<option value="">-- Select --</option>
+							<option value="recieved">Order Recieved</option>
+							<option value="processed">Order Processed</option>
+							<option value="production">Production</option>
+							<option value="shipping">
 								Scheduled for Shipping
 							</option>
-							<option value="Out For Delivery">
+							<option value="outForDelivery">
 								Out for Delivery
 							</option>
-							<option value="Delivered">Delivered</option>
+							<option value="delivered">Delivered</option>
 						</select>
 					</td>
 					<td>

@@ -109,8 +109,14 @@ class OrdersList extends Component {
 								</p>
 							</CardHeader>
 							<CardBody className="card-content table-responsive">
-								<Table responsive size="sm" className={TableStyles.Table}>
-									<thead className={`text-primary ${TableStyles.Thead}`}>
+								<Table
+									responsive
+									size="sm"
+									className={TableStyles.Table}>
+									<thead
+										className={`text-primary ${
+											TableStyles.Thead
+										}`}>
 										<tr>
 											<th
 												onClick={event =>
@@ -194,27 +200,29 @@ class OrdersList extends Component {
 																			.value
 																	)
 																}>
-																<option value="Order Recieved">
+																<option value="">
+																	-- Select --
+																</option>
+																<option value="recieved">
 																	Order
 																	Recieved
 																</option>
-																<option value="Order Processed">
+																<option value="processed">
 																	Order
 																	Processed
 																</option>
-																<option value="In Production">
-																	In
+																<option value="production">
 																	Production
 																</option>
-																<option value="Scheduled for Shipping">
+																<option value="shipping">
 																	Scheduled
 																	for Shipping
 																</option>
-																<option value="Out For Delivery">
+																<option value="outForDelivery">
 																	Out for
 																	Delivery
 																</option>
-																<option value="Delivered">
+																<option value="delivered">
 																	Delivered
 																</option>
 															</select>

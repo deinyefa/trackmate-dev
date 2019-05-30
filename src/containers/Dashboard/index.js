@@ -4,6 +4,7 @@ import { Container } from "reactstrap";
 import { withAuthentication } from "../../components/Session";
 import RecentOrders from "./RecentOrders";
 import Stats from "./Stats";
+import Charts from "./Charts";
 
 class DashboardPage extends Component {
 	state = {
@@ -37,7 +38,7 @@ class DashboardPage extends Component {
 				this.setState({
 					merchantCustomers,
 					totalOrders: this.state.merchantCustomers.length,
-				});
+        });
 			})
 			.catch(err => console.log(err));
 	};
@@ -46,6 +47,7 @@ class DashboardPage extends Component {
 		return (
 			<Container>
 				<Stats totalOrders={this.state.totalOrders} />
+        <Charts merchantCustomers={this.state.merchantCustomers} />
 				<RecentOrders
 					currentMerchant={this.state.currentMerchant}
 					merchantCustomers={this.state.merchantCustomers}
