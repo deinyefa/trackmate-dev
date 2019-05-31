@@ -203,7 +203,17 @@ class Charts extends Component {
 	};
 
 	render() {
-		let chartData = this.constructChartData();
+    let chartData = this.constructChartData();
+    
+    let lineSeries = "Order trends will show up here as time goes on.";
+    if (chartData[1].length >= 100) {
+      lineSeries = <Chart
+      options={chartData[0]}
+      series={chartData[1]}
+      type="line"
+      // width="500"
+    />
+    }
 
 		return (
 			<Row>
@@ -212,18 +222,13 @@ class Charts extends Component {
 						<CardHeader
 							className="card-chart chart line-graph"
 							data-background-color="green">
-							<h3 className="title">Order Status</h3>
+							<h3 className="title">Order Trends</h3>
 							<p className="category">
 								All your orders in the last year
 							</p>
 						</CardHeader>
 						<CardBody className="card-content">
-							<Chart
-								options={chartData[0]}
-								series={chartData[1]}
-								type="line"
-								// width="500"
-							/>
+							{lineSeries}
 						</CardBody>
 						<CardFooter>
 							<div className="stats">
@@ -242,7 +247,7 @@ class Charts extends Component {
 							data-background-color="green">
 							<h3 className="title">Order Status</h3>
 							<p className="category">
-								All your orders in the last year
+								All your orders current orders
 							</p>
 						</CardHeader>
 						<CardBody className="card-content">
@@ -250,7 +255,6 @@ class Charts extends Component {
 								options={chartData[3]}
 								series={chartData[2]}
 								type="donut"
-								// width="500"
 							/>
 						</CardBody>
 						<CardFooter>

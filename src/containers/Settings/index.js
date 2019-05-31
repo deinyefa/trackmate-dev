@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { Fragment } from "react";
+import { Row } from "reactstrap";
+
+import UpdateProfile from "./UpdateProfile";
+import UpdatePassword from "./UpdatePassword";
+import UpdateBillingInfo from "./UpdateBillingInfo";
 
 const SettingsPage = () => (
-  <div>
-    <h1>Settings Page</h1>
-  </div>
+	<Fragment>
+		<h1>Settings</h1>
+		<Row>
+      <UpdateProfile />
+      <UpdatePassword />
+      <UpdateBillingInfo />
+    </Row>
+	</Fragment>
 );
 
 export default SettingsPage;
