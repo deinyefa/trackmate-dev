@@ -102,9 +102,6 @@ class UpdateProfile extends Component {
 							hasError: err.message,
 							showModal: false,
 							loading: false,
-							username: "",
-							fname: "",
-							lname: "",
 						})
 					);
 			})
@@ -113,9 +110,6 @@ class UpdateProfile extends Component {
 					hasError: err.message,
 					showModal: false,
 					loading: false,
-					username: "",
-					fname: "",
-					lname: "",
 				})
 			);
 	};
