@@ -19,6 +19,7 @@ import "react-credit-cards/es/styles-compiled.css";
 
 class UpdateBillingInfo extends Component {
 	state = {
+    
 		country: "",
 		state: "",
 		togglePaymentForm: false,
@@ -205,7 +206,7 @@ class UpdateBillingInfo extends Component {
 						{/* Update Credit Card */}
 
 						{togglePaymentForm ? (
-							<Row className="mt-5">
+							<Row className="mt-5 w-75 mx-auto">
 								<Col style={{ alignSelf: "center" }}>
 									<Cards
 										number={cardNumber}

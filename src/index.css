@@ -21,8 +21,8 @@ body {
 	margin: 0;
 	font-family: "Open Sans", "Roboto", "Helvetica Neue", sans-serif;
 	-webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: rgba(238, 238, 238, 0.43);
+	-moz-osx-font-smoothing: grayscale;
+	background: rgba(238, 238, 238, 0.43);
 }
 
 .text-primary {
@@ -31,7 +31,18 @@ body {
 
 *[class*="btn-primary"] {
 	border-color: #00acc1;
-	color: #00acc1;
+	color: white;
+	background-color: #00acc1;
+}
+*[class*="btn-primary"]:active {
+	border-color: #00acc1;
+	color: white;
+	background-color: #00acc1;
+}
+.btn-primary:not(:disabled):not(.disabled):active {
+	border-color: #00acc1;
+	color: white;
+	background-color: #00acc1;
 }
 *[class*="btn-primary"]:hover {
 	border-color: #00acc1;
@@ -40,8 +51,10 @@ body {
 *[class*="btn-outline-primary"] {
 	color: #00acc1;
 	border-color: #00acc1;
+	background-color: transparent;
 }
-*[class*="btn-outline-primary"]:hover {
+*[class*="btn-outline-primary"]:hover,
+.btn-outline-primary:not(:disabled):not(.disabled):active {
 	border-color: #00acc1;
 	background-color: #00acc1;
 }
@@ -129,8 +142,8 @@ code {
 }
 
 .card .card-header .material-icons svg {
-  width: 56px;
-  height: 56px;
+	width: 56px;
+	height: 56px;
 }
 
 .card .card-header .title {
@@ -216,8 +229,8 @@ code {
 	position: relative;
 	top: 0;
 	font-size: 16px;
-  margin-right: 3px;
-  margin-left: 3px;
+	margin-right: 3px;
+	margin-left: 3px;
 }
 
 .card .card-footer h6 {
@@ -352,9 +365,9 @@ code {
 }
 
 .apexcharts-tooltip {
-  color: black;
+	color: black;
 }
 
 .apexcharts-series path {
-  stroke: none;
+	stroke: none;
 }
