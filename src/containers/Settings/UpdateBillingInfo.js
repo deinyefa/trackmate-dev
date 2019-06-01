@@ -13,16 +13,20 @@ import {
 	Button,
 	// Alert,
 } from "reactstrap";
-import {
-	CountryDropdown,
-	RegionDropdown,
-	CountryRegionData,
-} from "react-country-region-selector";
+import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
+import Cards from "react-credit-cards";
+import "react-credit-cards/es/styles-compiled.css";
 
 class UpdateBillingInfo extends Component {
 	state = {
 		country: "",
 		state: "",
+		togglePaymentForm: false,
+
+		cardName: "",
+		cardNumber: "",
+		cardExpiry: "",
+		cvc: "",
 	};
 
 	selectCountry(val) {
@@ -33,8 +37,24 @@ class UpdateBillingInfo extends Component {
 		this.setState({ state: val });
 	}
 
+	togglePaymentFormHandler = () => {
+		this.setState(prevState => ({
+			togglePaymentForm: !prevState.togglePaymentForm,
+		}));
+	};
+
+	captureFieldValue = ({ prop, value }) => this.setState({ [prop]: value });
+
 	render() {
-		const { country, state } = this.state;
+		const {
+			country,
+			state,
+			togglePaymentForm,
+			cardName,
+			cardNumber,
+			cardExpiry,
+			cvc,
+		} = this.state;
 
 		return (
 			<Col>
@@ -103,9 +123,10 @@ class UpdateBillingInfo extends Component {
 											Country
 										</Label>
 										<CountryDropdown
+											id="country"
 											value={country}
-                      className="form-control"
-                      priorityOptions={["NG", "CA", "US"]}
+											className="form-control"
+											priorityOptions={["NG", "CA", "US"]}
 											onChange={val =>
 												this.selectCountry(val)
 											}
@@ -117,11 +138,12 @@ class UpdateBillingInfo extends Component {
 								<Col>
 									<FormGroup>
 										<Label
-											for="city"
+											for="state"
 											className="field-label">
-											City
+											State/Province/Region
 										</Label>
 										<RegionDropdown
+											id="state"
 											country={country}
 											blankOptionLabel="No country selected"
 											defaultOptionLabel="Select a region"
@@ -136,14 +158,14 @@ class UpdateBillingInfo extends Component {
 								<Col>
 									<FormGroup>
 										<Label
-											for="state"
+											for="city"
 											className="field-label">
-											State/Province/Region
+											City
 										</Label>
 										<Input
-											id="state"
+											id="city"
 											type="text"
-											name="state"
+											name="city"
 											className="form-control"
 										/>
 									</FormGroup>
@@ -166,12 +188,125 @@ class UpdateBillingInfo extends Component {
 							</Row>
 							<Button
 								outline
-								color="danger"
-								disabled={true}
+								color="success"
+								// disabled={true}
 								type="submit">
 								Update billing address
 							</Button>
+							<Button
+								color="warning"
+								type="button"
+								onClick={this.togglePaymentFormHandler}
+								style={{ marginLeft: "15px " }}>
+								Update payment method
+							</Button>
 						</Form>
+
+						{/* Update Credit Card */}
+
+						{togglePaymentForm ? (
+							<Row className="mt-5">
+								<Col style={{ alignSelf: "center" }}>
+									<Cards
+										number={cardNumber}
+										name={cardName}
+										expiry={cardExpiry}
+										cvc={cvc}
+										// focused={state.focused}
+									/>
+								</Col>
+								<Col>
+									<Form>
+										<FormGroup>
+											<Label for="cardNumber">
+												Card number
+											</Label>
+											<Input
+												id="cardNumber"
+												type="number"
+												value={cardNumber}
+												onChange={event =>
+													this.captureFieldValue({
+														prop: "cardNumber",
+														value:
+															event.target.value,
+													})
+												}
+											/>
+										</FormGroup>
+										<FormGroup>
+											<Label for="cardName">
+												Name on card
+											</Label>
+											<Input
+												id="cardName"
+												type="text"
+												value={cardName}
+												onChange={event =>
+													this.captureFieldValue({
+														prop: "cardName",
+														value:
+															event.target.value,
+													})
+												}
+											/>
+										</FormGroup>
+										<Row>
+											<Col sm="9">
+												<FormGroup>
+													<Label for="cardExpiry">
+														Expiry
+													</Label>
+													<Input
+														id="cardExpiry"
+														value={cardExpiry}
+														onChange={event =>
+															this.captureFieldValue(
+																{
+																	prop:
+																		"cardExpiry",
+																	value:
+																		event
+																			.target
+																			.value,
+																}
+															)
+														}
+													/>
+												</FormGroup>
+											</Col>
+											<Col sm="3">
+												<FormGroup>
+													<Label for="cvc">CVC</Label>
+													<Input
+														id="cvc"
+														value={cvc}
+														type="number"
+														onChange={event =>
+															this.captureFieldValue(
+																{
+																	prop: "cvc",
+																	value:
+																		event
+																			.target
+																			.value,
+																}
+															)
+														}
+													/>
+												</FormGroup>
+											</Col>
+										</Row>
+										<Button
+											type="submit"
+											outline
+											color="success">
+											Update payment method
+										</Button>
+									</Form>
+								</Col>
+							</Row>
+						) : null}
 					</CardBody>
 				</Card>
 			</Col>
