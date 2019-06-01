@@ -68,13 +68,7 @@ class UpdateProfile extends Component {
 	};
 
 	pushDataOnline = () => {
-		const {
-			username,
-      email,
-			fname,
-			lname,
-			currentMerchant,
-		} = this.state;
+		const { username, email, fname, lname, currentMerchant } = this.state;
 		const { firebase } = this.props;
 		const merchantRef = firebase.db
 			.collection("companies")
@@ -82,9 +76,8 @@ class UpdateProfile extends Component {
 
 		this.setState({ loading: true });
 
-		firebase
-			.auth
-			.currentUser.updateEmail(email)
+		firebase.auth.currentUser
+			.updateEmail(email)
 			.then(() => {
 				merchantRef
 					.set({
@@ -99,6 +92,9 @@ class UpdateProfile extends Component {
 								"You have successfully updated your profile!",
 							showModal: false,
 							loading: false,
+							username: "",
+							fname: "",
+							lname: "",
 						})
 					)
 					.catch(err =>
@@ -106,6 +102,9 @@ class UpdateProfile extends Component {
 							hasError: err.message,
 							showModal: false,
 							loading: false,
+							username: "",
+							fname: "",
+							lname: "",
 						})
 					);
 			})
@@ -114,6 +113,9 @@ class UpdateProfile extends Component {
 					hasError: err.message,
 					showModal: false,
 					loading: false,
+					username: "",
+					fname: "",
+					lname: "",
 				})
 			);
 	};
@@ -149,12 +151,16 @@ class UpdateProfile extends Component {
 							<Form
 								onSubmit={event => this.onSubmitHandler(event)}>
 								{hasError ? (
-									<Alert color="danger" className="mx-auto my-3">
+									<Alert
+										color="danger"
+										className="mx-auto my-3">
 										{hasError}
 									</Alert>
 								) : null}
 								{success ? (
-									<Alert color="success" className="mx-auto my-3">
+									<Alert
+										color="success"
+										className="mx-auto my-3">
 										{success}
 									</Alert>
 								) : null}
@@ -273,7 +279,7 @@ class UpdateProfile extends Component {
 								</Row>
 								<Button
 									outline
-									color="primary"
+									color="success"
 									disabled={isInvalid}
 									type="submit">
 									Update profile
@@ -294,12 +300,7 @@ class UpdateProfile extends Component {
 						need your new email the next time you log in
 					</ModalBody>
 					<ModalFooter>
-						<Button
-							color="primary"
-							// onClick={this.toggleModalHandler}
-						>
-							Cancel
-						</Button>
+						<Button color="primary">Cancel</Button>
 						<Button color="danger" onClick={this.pushDataOnline}>
 							Update profile
 						</Button>
