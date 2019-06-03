@@ -8,7 +8,7 @@ import {
 	CardBody,
 	CardFooter,
 } from "reactstrap";
-import { MdCardMembership, MdCheck, MdLoop, MdPayment } from "react-icons/md";
+import { MdCardMembership, MdWarning, MdLoop, MdPayment } from "react-icons/md";
 
 import { withFirebase } from "../../components/Firebase";
 
@@ -54,9 +54,9 @@ class BillingInfo extends Component {
 							<CardFooter>
 								<div className="stats">
 									<i className="material-icons text-danger">
-										<MdCheck />
+										<MdWarning />
 									</i>
-									<small>yay!</small>
+									<small>Your free trial ends in 7 days</small>
 								</div>
 							</CardFooter>
 						</Card>
@@ -78,7 +78,7 @@ class BillingInfo extends Component {
 									<strong>Created on: </strong> May 30th 2018
 								</p>
 								<p>
-									<strong>Next billing cycle starts: </strong>
+									<strong>Next cycle: </strong>
 									in 2 days
 								</p>
 							</CardBody>
