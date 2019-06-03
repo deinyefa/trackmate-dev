@@ -19,9 +19,14 @@ import "react-credit-cards/es/styles-compiled.css";
 
 class UpdateBillingInfo extends Component {
 	state = {
-    
+		fullname: "",
+		address1: "",
+		address2: "",
 		country: "",
 		state: "",
+		city: "",
+		postalCode: "",
+
 		togglePaymentForm: false,
 
 		cardName: "",
@@ -29,6 +34,8 @@ class UpdateBillingInfo extends Component {
 		cardExpiry: "",
 		cvc: "",
 	};
+
+	captureFieldValue = ({ prop, value }) => this.setState({ [prop]: value });
 
 	selectCountry(val) {
 		this.setState({ country: val });
@@ -48,14 +55,30 @@ class UpdateBillingInfo extends Component {
 
 	render() {
 		const {
+			fullname,
+			address1,
+			address2,
+			city,
+			postalCode,
 			country,
 			state,
+
 			togglePaymentForm,
+
 			cardName,
 			cardNumber,
 			cardExpiry,
 			cvc,
 		} = this.state;
+
+		const invaidAddress =
+			fullname.trim() === "" ||
+			address1.trim() === "" ||
+			city.trim() === "" ||
+			postalCode.trim() === "" ||
+			country === "" ||
+			state === "";
+		const invalidCard = "";
 
 		return (
 			<Col>
@@ -73,6 +96,13 @@ class UpdateBillingInfo extends Component {
 									type="text"
 									name="fullname"
 									className="form-control"
+									value={fullname}
+									onChange={event =>
+										this.captureFieldValue({
+											prop: "fullname",
+											value: event.target.value,
+										})
+									}
 								/>
 							</FormGroup>
 							<Row>
@@ -88,6 +118,13 @@ class UpdateBillingInfo extends Component {
 											type="text"
 											name="address1"
 											className="form-control"
+											value={address1}
+                      onChange={event =>
+                        this.captureFieldValue({
+                          prop: "address1",
+                          value: event.target.value,
+                        })
+                      }
 										/>
 										<FormText>
 											Street address, P.O. box, company
@@ -107,6 +144,13 @@ class UpdateBillingInfo extends Component {
 											type="text"
 											name="address2"
 											className="form-control"
+											value={address2}
+                      onChange={event =>
+                        this.captureFieldValue({
+                          prop: "address2",
+                          value: event.target.value,
+                        })
+                      }
 										/>
 										<FormText>
 											Apartment, suite, unit, building,
@@ -168,6 +212,13 @@ class UpdateBillingInfo extends Component {
 											type="text"
 											name="city"
 											className="form-control"
+											value={city}
+                      onChange={event =>
+                        this.captureFieldValue({
+                          prop: "city",
+                          value: event.target.value,
+                        })
+                      }
 										/>
 									</FormGroup>
 								</Col>
@@ -183,6 +234,13 @@ class UpdateBillingInfo extends Component {
 											type="text"
 											name="postalCode"
 											className="form-control"
+											value={postalCode}
+                      onChange={event =>
+                        this.captureFieldValue({
+                          prop: "postalCode",
+                          value: event.target.value,
+                        })
+                      }
 										/>
 									</FormGroup>
 								</Col>
@@ -190,7 +248,7 @@ class UpdateBillingInfo extends Component {
 							<Button
 								outline
 								color="success"
-								// disabled={true}
+								disabled={invaidAddress}
 								type="submit">
 								Update billing address
 							</Button>
@@ -198,7 +256,7 @@ class UpdateBillingInfo extends Component {
 								color="warning"
 								type="button"
 								onClick={this.togglePaymentFormHandler}
-								style={{ marginLeft: "15px " }}>
+								style={{ marginLeft: "15px" }}>
 								Update payment method
 							</Button>
 						</Form>
@@ -301,6 +359,7 @@ class UpdateBillingInfo extends Component {
 										<Button
 											type="submit"
 											outline
+											disabled
 											color="success">
 											Update payment method
 										</Button>

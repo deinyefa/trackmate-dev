@@ -135,7 +135,10 @@ class UpdateProfile extends Component {
 		} = this.state;
 
 		const isInvalid =
-			username === "" || email === "" || fname === "" || lname === "";
+			username.trim() === "" ||
+			email.trim() === "" ||
+			fname.trim() === "" ||
+			lname.trim() === "";
 
 		return (
 			<Col lg="9">

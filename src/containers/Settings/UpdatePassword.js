@@ -85,7 +85,7 @@ class UpdatePassword extends Component {
 		} = this.state;
 
 		const isInvalid =
-			currpass === "" ||
+			currpass.trim() === "" ||
 			newpass1.toLocaleLowerCase().length < 8 ||
 			newpass2 !== newpass1;
 
