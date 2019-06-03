@@ -80,12 +80,15 @@ class UpdateProfile extends Component {
 			.updateEmail(email)
 			.then(() => {
 				merchantRef
-					.set({
-						email,
-						firstName: fname,
-						lastName: lname,
-						username,
-					})
+					.set(
+						{
+							email,
+							firstName: fname,
+							lastName: lname,
+							username,
+						},
+						{ merge: true }
+					)
 					.then(() =>
 						this.setState({
 							success:
