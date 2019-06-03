@@ -184,6 +184,28 @@ code {
 	fill: rgba(255, 255, 255, 0.4);
 }
 
+small {
+  color: #777;
+  font-weight: 400;
+}
+
+.card .card-title small {
+	font-size: 18px;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+	height: 0;
+}
+
+.card .card-title small:first-child {
+	position: relative;
+	top: -17px;
+	font-size: 20px;
+}
+
+.card .card-title span {
+	margin-right: 5px;
+}
+
 .card .chart-title {
 	position: absolute;
 	top: 25px;

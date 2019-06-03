@@ -1,8 +1,12 @@
 import React from 'react';
 
+import BillingInfo from './BillingInfo';
+
+
 const BillingPage = () => (
   <div>
-    <h1>Billing Page</h1>
+    <h1 className="sr-only">Billing</h1>
+    <BillingInfo />
   </div>
 );
 
