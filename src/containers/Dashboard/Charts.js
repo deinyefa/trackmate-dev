@@ -241,7 +241,7 @@ class Charts extends Component {
 					</Card>
 				</Col>
 				<Col md="12" lg="6">
-					<Card>
+					{/* <Card>
 						<CardHeader
 							className="card-chart chart line-graph"
 							data-background-color="green">
@@ -265,7 +265,7 @@ class Charts extends Component {
 								updated just now
 							</div>
 						</CardFooter>
-					</Card>
+					</Card> */}
 				</Col>
 			</Row>
 		);
