@@ -53,6 +53,16 @@ class UpdateBillingInfo extends Component {
 
 	captureFieldValue = ({ prop, value }) => this.setState({ [prop]: value });
 
+	onSubmitBillingAddressHandler = event => {
+		event.preventDefault();
+		console.log(this.state);
+	};
+
+	onSubmitUpdateCardHandler = event => {
+		event.preventDefault();
+		console.log(this.state);
+	};
+
 	render() {
 		const {
 			fullname,
@@ -78,7 +88,12 @@ class UpdateBillingInfo extends Component {
 			postalCode.trim() === "" ||
 			country === "" ||
 			state === "";
-		const invalidCard = "";
+
+		const invalidCard =
+			cardName.trim() === "" ||
+			cardNumber.trim() === "" ||
+			cardExpiry.trim() === "" ||
+			cvc.trim() === "";
 
 		return (
 			<Col>
@@ -86,7 +101,10 @@ class UpdateBillingInfo extends Component {
 				<Card>
 					<CardBody>
 						<h3>Billing address</h3>
-						<Form>
+						<Form
+							onSubmit={event =>
+								this.onSubmitBillingAddressHandler(event)
+							}>
 							<FormGroup>
 								<Label for="fullname" className="field-label">
 									Full name
@@ -119,12 +137,12 @@ class UpdateBillingInfo extends Component {
 											name="address1"
 											className="form-control"
 											value={address1}
-                      onChange={event =>
-                        this.captureFieldValue({
-                          prop: "address1",
-                          value: event.target.value,
-                        })
-                      }
+											onChange={event =>
+												this.captureFieldValue({
+													prop: "address1",
+													value: event.target.value,
+												})
+											}
 										/>
 										<FormText>
 											Street address, P.O. box, company
@@ -145,12 +163,12 @@ class UpdateBillingInfo extends Component {
 											name="address2"
 											className="form-control"
 											value={address2}
-                      onChange={event =>
-                        this.captureFieldValue({
-                          prop: "address2",
-                          value: event.target.value,
-                        })
-                      }
+											onChange={event =>
+												this.captureFieldValue({
+													prop: "address2",
+													value: event.target.value,
+												})
+											}
 										/>
 										<FormText>
 											Apartment, suite, unit, building,
@@ -213,12 +231,12 @@ class UpdateBillingInfo extends Component {
 											name="city"
 											className="form-control"
 											value={city}
-                      onChange={event =>
-                        this.captureFieldValue({
-                          prop: "city",
-                          value: event.target.value,
-                        })
-                      }
+											onChange={event =>
+												this.captureFieldValue({
+													prop: "city",
+													value: event.target.value,
+												})
+											}
 										/>
 									</FormGroup>
 								</Col>
@@ -235,12 +253,12 @@ class UpdateBillingInfo extends Component {
 											name="postalCode"
 											className="form-control"
 											value={postalCode}
-                      onChange={event =>
-                        this.captureFieldValue({
-                          prop: "postalCode",
-                          value: event.target.value,
-                        })
-                      }
+											onChange={event =>
+												this.captureFieldValue({
+													prop: "postalCode",
+													value: event.target.value,
+												})
+											}
 										/>
 									</FormGroup>
 								</Col>
@@ -275,7 +293,12 @@ class UpdateBillingInfo extends Component {
 									/>
 								</Col>
 								<Col>
-									<Form>
+									<Form
+										onSubmit={event =>
+											this.onSubmitUpdateCardHandler(
+												event
+											)
+										}>
 										<FormGroup>
 											<Label for="cardNumber">
 												Card number
@@ -359,7 +382,7 @@ class UpdateBillingInfo extends Component {
 										<Button
 											type="submit"
 											outline
-											disabled
+											disabled={invalidCard}
 											color="success">
 											Update payment method
 										</Button>
